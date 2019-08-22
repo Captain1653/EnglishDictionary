@@ -8,7 +8,7 @@ public class RussianQuestionStrategy implements QuestionStrategy {
 
     @Override
     public String askQuestion(Scanner scanner, WordWithTranslation wordWithTranslation) {
-        String description = wordWithTranslation.getDescription() == null ? null : "Desctiption: " + wordWithTranslation.getDescription();
+        String description = wordWithTranslation.getDescription() == null ? "" : "Desctiption: " + wordWithTranslation.getDescription();
         System.out.println("Word: " + wordWithTranslation.getRussian() + " " + description);
         return scanner.nextLine();
     }

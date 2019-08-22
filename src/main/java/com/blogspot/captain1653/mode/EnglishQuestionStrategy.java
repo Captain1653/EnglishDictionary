@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class EnglishQuestionStrategy implements QuestionStrategy {
     @Override
     public String askQuestion(Scanner scanner, WordWithTranslation wordWithTranslation) {
-        String description = wordWithTranslation.getDescription() == null ? null : "Desctiption: " + wordWithTranslation.getDescription();
+        String description = wordWithTranslation.getDescription() == null ? "" : "Desctiption: " + wordWithTranslation.getDescription();
         System.out.print("Word: " + wordWithTranslation.getEnglish() + " " + description);
         return scanner.nextLine();
 
