@@ -2,10 +2,14 @@ package com.blogspot.captain1653;
 
 import com.blogspot.captain1653.mode.QuestionStrategy;
 
+import java.util.function.Predicate;
+
 public class Configuration {
 
     private QuestionStrategy questionStrategy;
-    private String pathFile;
+    private String[] pathFiles;
+    private Predicate<String> typeWordPredicate;
+
 
     public QuestionStrategy getQuestionStrategy() {
         return questionStrategy;
@@ -15,11 +19,20 @@ public class Configuration {
         this.questionStrategy = questionStrategy;
     }
 
-    public void setPathFile(String pathFile) {
-        this.pathFile = pathFile;
+    public void setPathFiles(String[] pathFiles) {
+        this.pathFiles = pathFiles;
     }
 
-    public String getPathFile() {
-        return pathFile;
+    public String[] getPathFiles() {
+        return pathFiles;
+    }
+
+
+    public void setTypeWordPredicate(Predicate<String> typeWordPredicate) {
+        this.typeWordPredicate = typeWordPredicate;
+    }
+
+    public Predicate<String> getTypeWordPredicate() {
+        return typeWordPredicate;
     }
 }

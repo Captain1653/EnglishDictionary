@@ -2,10 +2,10 @@ package com.blogspot.captain1653;
 
 public enum ExternalProperty {
 
-    PATH_TO_FILE {
+    FILES {
         @Override
         public String get() {
-            return "file";
+            return "files";
         }
     },
 
@@ -19,6 +19,13 @@ public enum ExternalProperty {
         @Override
         public String get() {
             return "config";
+        }
+    },
+
+    TYPE_WORD {
+        @Override
+        public String get() {
+            return "type-word";
         }
     };
 

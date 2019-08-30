@@ -1,21 +1,30 @@
 package com.blogspot.captain1653.configreader;
 
+import static com.blogspot.captain1653.ExternalProperty.FILES;
 import static com.blogspot.captain1653.ExternalProperty.MODE;
-import static com.blogspot.captain1653.ExternalProperty.PATH_TO_FILE;
+import static com.blogspot.captain1653.ExternalProperty.TYPE_WORD;
 
 import com.blogspot.captain1653.Configuration;
-import com.blogspot.captain1653.mode.EnglishQuestionStrategy;
-import com.blogspot.captain1653.mode.MixQuestionStrategy;
+import com.blogspot.captain1653.TypeWordPredicateFactory;
 import com.blogspot.captain1653.mode.QuestionStrategy;
-import com.blogspot.captain1653.mode.RussianQuestionStrategy;
+import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
+import java.util.function.Predicate;
 
 public class PropertyConfigReader implements ConfigReader {
+
+    private QuestionStrategyFactory questionStrategyFactory;
+    private TypeWordPredicateFactory typeWordPredicateFactory;
+
+    public PropertyConfigReader(QuestionStrategyFactory questionStrategyFactory,
+                                TypeWordPredicateFactory typeWordPredicateFactory) {
+        this.questionStrategyFactory = questionStrategyFactory;
+        this.typeWordPredicateFactory = typeWordPredicateFactory;
+    }
 
     @Override
     public Configuration readConfiguration(String pathToConfigFile) throws IOException {
@@ -26,25 +35,17 @@ public class PropertyConfigReader implements ConfigReader {
         }
         Configuration configuration = new Configuration();
 
-        String mode = properties.getProperty(MODE.get(), QuestionModeConstants.EN);
-        QuestionStrategy questionStrategy = getQuestionStrategy(mode);
+        String mode = properties.getProperty(MODE.get());
+        QuestionStrategy questionStrategy = questionStrategyFactory.create(mode);
         configuration.setQuestionStrategy(questionStrategy);
 
-        configuration.setPathFile(properties.getProperty(PATH_TO_FILE.get()));
+        String[] fileNamesWithWords = properties.getProperty(FILES.get()).split(",");
+        configuration.setPathFiles(fileNamesWithWords);
+
+        String typeWord = properties.getProperty(TYPE_WORD.get());
+        Predicate<String> predicate = typeWordPredicateFactory.create(typeWord);
+        configuration.setTypeWordPredicate(predicate);
+
         return configuration;
-    }
-
-    private QuestionStrategy getQuestionStrategy(String questionMode) {
-        switch (questionMode) {
-            case QuestionModeConstants.MIX: return new MixQuestionStrategy();
-            case QuestionModeConstants.RU: return new RussianQuestionStrategy();
-            default: return new EnglishQuestionStrategy();
-        }
-    }
-
-    private static class QuestionModeConstants {
-        private static final String RU = "ru";
-        private static final String EN = "en";
-        private static final String MIX = "mix";
     }
 }
