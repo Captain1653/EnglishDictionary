@@ -14,6 +14,12 @@ public enum ExternalProperty {
         public String get() {
             return "mode";
         }
+    },
+    PATH_TO_CONFIG {
+        @Override
+        public String get() {
+            return "config";
+        }
     };
 
     public abstract String get();
