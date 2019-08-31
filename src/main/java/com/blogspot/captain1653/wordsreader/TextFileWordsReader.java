@@ -15,9 +15,9 @@ public class TextFileWordsReader implements WordsReader {
     @Override
     public Map<Integer, WordWithTranslation> getWords(String[] pathToFile, Predicate<String> typeWordPredicate) throws IOException {
         Map<Integer, WordWithTranslation> words = new HashMap<>();
+        Integer i = 1;
         for (String path : pathToFile) {
             Scanner scanner = new Scanner(new File(path));
-            Integer i = 1;
             while (scanner.hasNextLine()) {
                 String lineWithWords = scanner.nextLine();
                 if (typeWordPredicate.test(lineWithWords)) {
