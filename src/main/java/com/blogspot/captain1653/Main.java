@@ -37,7 +37,7 @@ public class Main {
 
         int countQuestion = 0;
         while (true) {
-            WordWithTranslation wordWithTranslation = words.get(new Random().nextInt(words.size()) + 1);
+            WordWithTranslation wordWithTranslation = words.get(new Random(System.nanoTime()).nextInt(words.size()) + 1);
             String answerFromUser = questionStrategy.askQuestion(scanner, wordWithTranslation);
             String rightAnswer = questionStrategy.getRightAnswer(wordWithTranslation);
 
