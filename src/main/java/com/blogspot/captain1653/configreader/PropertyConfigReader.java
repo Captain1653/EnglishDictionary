@@ -1,9 +1,5 @@
 package com.blogspot.captain1653.configreader;
 
-import static com.blogspot.captain1653.ExternalProperty.FILES;
-import static com.blogspot.captain1653.ExternalProperty.MODE;
-import static com.blogspot.captain1653.ExternalProperty.TYPE_WORD;
-
 import com.blogspot.captain1653.Configuration;
 import com.blogspot.captain1653.TypeWordPredicateFactory;
 import com.blogspot.captain1653.mode.QuestionStrategy;
@@ -15,7 +11,11 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.function.Predicate;
 
+import static com.blogspot.captain1653.ExternalProperty.*;
+
 public class PropertyConfigReader implements ConfigReader {
+
+    private static final String EMPTY_VALUE_FOLDER_FOR_FILES = "";
 
     private QuestionStrategyFactory questionStrategyFactory;
     private TypeWordPredicateFactory typeWordPredicateFactory;
@@ -45,6 +45,9 @@ public class PropertyConfigReader implements ConfigReader {
         String typeWord = properties.getProperty(TYPE_WORD.get());
         Predicate<String> predicate = typeWordPredicateFactory.create(typeWord);
         configuration.setTypeWordPredicate(predicate);
+
+        String folderForFiles = properties.getProperty(FOLDER.get(),EMPTY_VALUE_FOLDER_FOR_FILES);
+        configuration.setFolderForFiles(folderForFiles);
 
         return configuration;
     }

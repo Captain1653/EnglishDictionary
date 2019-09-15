@@ -27,6 +27,13 @@ public enum ExternalProperty {
         public String get() {
             return "type-word";
         }
+    },
+
+    FOLDER {
+        @Override
+        public String get() {
+            return "folder";
+        }
     };
 
     public abstract String get();

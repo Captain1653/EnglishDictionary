@@ -9,6 +9,7 @@ public class Configuration {
     private QuestionStrategy questionStrategy;
     private String[] pathFiles;
     private Predicate<String> typeWordPredicate;
+    private String folderForFiles;
 
 
     public QuestionStrategy getQuestionStrategy() {
@@ -34,5 +35,13 @@ public class Configuration {
 
     public Predicate<String> getTypeWordPredicate() {
         return typeWordPredicate;
+    }
+
+    public void setFolderForFiles(String folderForFiles) {
+        this.folderForFiles = folderForFiles;
+    }
+
+    public String getFolderForFiles() {
+        return folderForFiles;
     }
 }

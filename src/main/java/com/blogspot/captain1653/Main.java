@@ -30,7 +30,7 @@ public class Main {
 
         Predicate<String> typeWordPredicate = configuration.getTypeWordPredicate();
         WordsReader wordsReader = new TextFileWordsReader();
-        Map<Integer, WordWithTranslation> words = wordsReader.getWords(configuration.getPathFiles(), typeWordPredicate);
+        Map<Integer, WordWithTranslation> words = wordsReader.getWords(configuration, typeWordPredicate);
 
         Scanner scanner = new Scanner(System.in);
         Set<String> wordsWithMistakes = new HashSet<>();
