@@ -12,7 +12,6 @@ public class QuestionStrategyFactory {
 
     private static class QuestionModeConstants {
         private static final String RU = "ru";
-        private static final String EN = "en";
         private static final String MIX = "mix";
     }
 }

@@ -16,6 +16,7 @@ import static com.blogspot.captain1653.ExternalProperty.*;
 public class PropertyConfigReader implements ConfigReader {
 
     private static final String EMPTY_VALUE_FOLDER_FOR_FILES = "";
+    private static final String SEPARATOR_FOR_FILES = ",";
 
     private QuestionStrategyFactory questionStrategyFactory;
     private TypeWordPredicateFactory typeWordPredicateFactory;
@@ -39,7 +40,7 @@ public class PropertyConfigReader implements ConfigReader {
         QuestionStrategy questionStrategy = questionStrategyFactory.create(mode);
         configuration.setQuestionStrategy(questionStrategy);
 
-        String[] fileNamesWithWords = properties.getProperty(FILES.get()).split(",");
+        String[] fileNamesWithWords = properties.getProperty(FILES.get()).split(SEPARATOR_FOR_FILES);
         configuration.setPathFiles(fileNamesWithWords);
 
         String typeWord = properties.getProperty(TYPE_WORD.get());
