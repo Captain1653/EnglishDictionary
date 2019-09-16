@@ -5,8 +5,7 @@ import com.blogspot.captain1653.WordWithTranslation;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,11 +19,9 @@ class TextFileWordsReaderTest {
         Predicate<String> typeWordPredicate = line -> true;
 
         WordsReader wordsReader = new TextFileWordsReader();
-        Map<Integer, WordWithTranslation> actual = wordsReader.getWords(configuration, typeWordPredicate);
+        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
 
-        Map<Integer, WordWithTranslation> expected = new HashMap<>();
-        expected.put(1, new WordWithTranslation("house=дом"));
-        expected.put(2, new WordWithTranslation("next=следующий"));
+        List<String> expected = Arrays.asList("noun;house=дом", "adjective;next=следующий");
         assertEquals(expected, actual);
     }
 
@@ -42,10 +39,9 @@ class TextFileWordsReaderTest {
         Predicate<String> typeWordPredicate = line -> line.startsWith("noun");
 
         WordsReader wordsReader = new TextFileWordsReader();
-        Map<Integer, WordWithTranslation> actual = wordsReader.getWords(configuration, typeWordPredicate);
+        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
 
-        Map<Integer, WordWithTranslation> expected = new HashMap<>();
-        expected.put(1, new WordWithTranslation("house=дом"));
+        List<String> expected = Collections.singletonList("noun;house=дом");
         assertEquals(expected, actual);
     }
 }

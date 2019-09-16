@@ -1,2 +1,2 @@
 noun;house=дом
-verb;next=следующий
+adjective;next=следующий
