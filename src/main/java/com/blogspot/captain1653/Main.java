@@ -48,9 +48,12 @@ public class Main {
             String rightAnswer = questionStrategy.getRightAnswer(wordWithTranslation);
 
             if (EXIT_VALUE.equals(answerFromUser)) {
-                System.out.println("Count question is: " + countQuestion);
-                System.out.println("You have done " + wordsWithMistakes.size() + " mistakes");
-                System.out.println("Words: are: " + String.join(",   ", wordsWithMistakes));
+                System.out.println(String.format("Count question is: %d", countQuestion));
+                int countMistakes = wordsWithMistakes.size();
+                System.out.println(String.format("You have done %d mistakes", countMistakes));
+                if (countMistakes > 0) {
+                    System.out.println("Words: are: " + String.join(",   ", wordsWithMistakes));
+                }
                 return;
             }
             if (rightAnswer.equals(answerFromUser)) {
