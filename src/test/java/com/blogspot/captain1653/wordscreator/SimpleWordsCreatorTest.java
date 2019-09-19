@@ -36,4 +36,16 @@ class SimpleWordsCreatorTest {
         assertEquals("делать", word.getRussian());
         assertEquals("description", word.getDescription());
     }
+
+    @Test
+    void createWordsWithTranslationWithoutTypeWord() {
+        List<String> lines = Collections.singletonList("do=делать=description");
+        WordsCreator wordsCreator = new SimpleWordsCreator();
+        Map<Integer, WordWithTranslation> words = wordsCreator.create(lines);
+
+        WordWithTranslation word = words.get(1);
+        assertEquals("do", word.getEnglish());
+        assertEquals("делать", word.getRussian());
+        assertEquals("description", word.getDescription());
+    }
 }

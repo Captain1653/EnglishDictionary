@@ -16,7 +16,12 @@ public class SimpleWordsCreator implements WordsCreator {
         int i = 1;
 
         for (String line : lines) {
-            String englishAndRussianWords = line.split(DELIMITER_TYPE_WORD)[1];
+            String englishAndRussianWords;
+            if (line.contains(DELIMITER_TYPE_WORD)) {
+                englishAndRussianWords = line.split(DELIMITER_TYPE_WORD)[1];
+            } else {
+                englishAndRussianWords = line;
+            }
             WordWithTranslation wordWithTranslation = new WordWithTranslation(englishAndRussianWords);
             words.put(i, wordWithTranslation);
             i++;
