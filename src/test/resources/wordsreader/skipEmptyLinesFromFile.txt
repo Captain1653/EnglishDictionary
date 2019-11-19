@@ -1,0 +1,4 @@
+
+noun;house=дом
+
+adjective;next=следующий

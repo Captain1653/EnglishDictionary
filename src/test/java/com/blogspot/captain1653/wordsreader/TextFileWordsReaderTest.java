@@ -44,4 +44,17 @@ class TextFileWordsReaderTest {
         List<String> expected = Collections.singletonList("noun;house=дом");
         assertEquals(expected, actual);
     }
+
+    @Test
+    void skipEmptyLinesFromFile() throws IOException {
+        String pathToFile = "wordsreader/skipEmptyLinesFromFile.txt";
+        Configuration configuration = getConfigurationWithPathFile(pathToFile);
+        Predicate<String> typeWordPredicate = line -> true;
+
+        WordsReader wordsReader = new TextFileWordsReader();
+        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
+
+        List<String> expected = Arrays.asList("noun;house=дом", "adjective;next=следующий");
+        assertEquals(expected, actual);
+    }
 }
