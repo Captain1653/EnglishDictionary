@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import com.blogspot.captain1653.Configuration;
 
@@ -17,19 +18,29 @@ public class TextFileWordsReader implements WordsReader {
     public List<String> getWords(Configuration configuration, Predicate<String> typeWordPredicate) throws IOException {
         List<String> lines = new ArrayList<>();
         String folderForFiles = configuration.getFolderForFiles();
-        for (String path : configuration.getPathFiles()) {
-            String fullPathToFile = folderForFiles + path;
-            Scanner scanner = new Scanner(new File(fullPathToFile));
 
-            while (scanner.hasNextLine()) {
-                String lineWithWords = scanner.nextLine();
-                if (isAppropriateLine(typeWordPredicate, lineWithWords)) {
-                    lines.add(lineWithWords);
+        String[] pathFiles = "*".equals(configuration.getPathFiles()[0]) ?
+                             getAllFilesInFolder(folderForFiles) :
+                             configuration.getPathFiles();
+
+        for (String path : pathFiles) {
+            String fullPathToFile = folderForFiles + path;
+            try (Scanner scanner = new Scanner(new File(fullPathToFile))) {
+                while (scanner.hasNextLine()) {
+                    String lineWithWords = scanner.nextLine();
+                    if (isAppropriateLine(typeWordPredicate, lineWithWords)) {
+                        lines.add(lineWithWords);
+                    }
                 }
             }
-            scanner.close();
         }
         return lines;
+    }
+
+    private String[] getAllFilesInFolder(String folderForFiles) {
+        return Stream.of(new File(folderForFiles).listFiles())
+                .map(File::getName)
+                .toArray(String[]::new);
     }
 
     private boolean isAppropriateLine(Predicate<String> typeWordPredicate, String lineWithWords) {
