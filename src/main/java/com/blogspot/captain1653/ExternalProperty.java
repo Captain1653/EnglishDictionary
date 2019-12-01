@@ -34,6 +34,13 @@ public enum ExternalProperty {
         public String get() {
             return "folder";
         }
+    },
+
+    ORDER {
+        @Override
+        public String get() {
+            return "order";
+        }
     };
 
     public abstract String get();

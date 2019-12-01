@@ -10,6 +10,7 @@ public class Configuration {
     private String[] pathFiles;
     private Predicate<String> typeWordPredicate;
     private String folderForFiles;
+    private String order;
 
 
     public QuestionStrategy getQuestionStrategy() {
@@ -43,5 +44,13 @@ public class Configuration {
 
     public String getFolderForFiles() {
         return folderForFiles;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
     }
 }

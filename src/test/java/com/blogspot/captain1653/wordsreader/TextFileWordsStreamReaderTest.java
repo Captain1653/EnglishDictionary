@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TextFileWordsReaderTest {
+class TextFileWordsStreamReaderTest {
 
     private static final String TEST_RESOURCES = "src/test/resources/";
 

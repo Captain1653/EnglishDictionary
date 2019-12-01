@@ -2,19 +2,16 @@ package com.blogspot.captain1653.wordscreator;
 
 import com.blogspot.captain1653.WordWithTranslation;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SimpleWordsCreator implements WordsCreator {
 
     private static final String DELIMITER_TYPE_WORD = ";";
 
     @Override
-    public Map<Integer, WordWithTranslation> create(List<String> lines) {
-        Map<Integer, WordWithTranslation> words = new HashMap<>();
-        int i = 1;
-
+    public List<WordWithTranslation> create(List<String> lines) {
+        List<WordWithTranslation> words = new ArrayList<>();
         for (String line : lines) {
             String englishAndRussianWords;
             if (line.contains(DELIMITER_TYPE_WORD)) {
@@ -23,8 +20,7 @@ public class SimpleWordsCreator implements WordsCreator {
                 englishAndRussianWords = line;
             }
             WordWithTranslation wordWithTranslation = new WordWithTranslation(englishAndRussianWords);
-            words.put(i, wordWithTranslation);
-            i++;
+            words.add(wordWithTranslation);
         }
 
         return words;

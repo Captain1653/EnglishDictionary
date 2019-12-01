@@ -24,6 +24,7 @@ class PropertyFileConfigReader {
         assertArrayEquals(new String[]{"one.txt", "two.txt"}, configuration.getPathFiles());
         assertEquals(RussianQuestionStrategy.class, configuration.getQuestionStrategy().getClass());
         assertTrue(configuration.getTypeWordPredicate().test("noun"));
+        assertEquals("seq",configuration.getOrder());
     }
 
     @Test

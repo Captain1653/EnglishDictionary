@@ -1,6 +1,7 @@
 package com.blogspot.captain1653.configreader;
 
 import com.blogspot.captain1653.Configuration;
+import com.blogspot.captain1653.ExternalProperty;
 import com.blogspot.captain1653.TypeWordPredicateFactory;
 import com.blogspot.captain1653.mode.QuestionStrategy;
 import com.blogspot.captain1653.mode.QuestionStrategyFactory;
@@ -49,6 +50,9 @@ public class PropertyConfigReader implements ConfigReader {
 
         String folderForFiles = properties.getProperty(FOLDER.get(),EMPTY_VALUE_FOLDER_FOR_FILES);
         configuration.setFolderForFiles(folderForFiles);
+
+        String order = properties.getProperty(ExternalProperty.ORDER.get());
+        configuration.setOrder(order);
 
         return configuration;
     }
