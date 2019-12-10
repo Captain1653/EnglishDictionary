@@ -16,6 +16,7 @@ public class RandomWordsStream implements WordsStream {
         int i = 1;
         for (WordWithTranslation word : wordsWithTranslations) {
             words.put(i, word);
+            i++;
         }
     }
 
