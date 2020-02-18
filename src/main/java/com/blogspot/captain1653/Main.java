@@ -59,7 +59,7 @@ public class Main {
                 }
                 return;
             }
-            if (rightAnswer.equals(answerFromUser)) {
+            if (rightAnswer.equalsIgnoreCase(answerFromUser)) {
                 System.out.println("TRUE");
             } else {
                 System.out.println("NO!!!!!! Answer is '" + rightAnswer + "'");
