@@ -1,7 +1,7 @@
 package com.blogspot.captain1653.configreader;
 
 import com.blogspot.captain1653.Configuration;
-import com.blogspot.captain1653.TypeWordPredicateFactory;
+import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 import com.blogspot.captain1653.mode.RussianQuestionStrategy;
 import org.junit.jupiter.api.Test;
@@ -12,12 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PropertyFileConfigReader {
 
+    private final static TypeWordPredicateFactory TYPE_WORD_PREDICATE_FACTORY = TypeWordPredicateFactory.createFactory();
+
     @Test
     void readConfigWithAllParameters() throws IOException {
         String pathToFile = "src/test/resources/configreader/fullConfiguration.properties";
         QuestionStrategyFactory questionStrategyFactory = new QuestionStrategyFactory();
-        TypeWordPredicateFactory typeWordPredicateFactory = new TypeWordPredicateFactory();
-        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, typeWordPredicateFactory);
+        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, TYPE_WORD_PREDICATE_FACTORY);
         Configuration configuration = configReader.readConfiguration(pathToFile);
 
         assertEquals("someFolder/", configuration.getFolderForFiles());
@@ -31,8 +32,7 @@ class PropertyFileConfigReader {
     void readConfigWithDefaultValueFolderEmptyString() throws IOException {
         String pathToFile = "src/test/resources/configreader/defaultValueFolderEmptyString.properties";
         QuestionStrategyFactory questionStrategyFactory = new QuestionStrategyFactory();
-        TypeWordPredicateFactory typeWordPredicateFactory = new TypeWordPredicateFactory();
-        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, typeWordPredicateFactory);
+        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, TYPE_WORD_PREDICATE_FACTORY);
         Configuration configuration = configReader.readConfiguration(pathToFile);
 
         assertEquals("", configuration.getFolderForFiles());

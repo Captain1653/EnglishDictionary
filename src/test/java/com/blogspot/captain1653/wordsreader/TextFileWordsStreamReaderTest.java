@@ -1,6 +1,7 @@
 package com.blogspot.captain1653.wordsreader;
 
 import com.blogspot.captain1653.Configuration;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -61,6 +62,7 @@ class TextFileWordsStreamReaderTest {
         assertEquals(expected, actual);
     }
 
+    @Disabled
     @Test
     void readAllFilesInTheFolderWhenPathToFilesIsStar() throws IOException {
         String pathToFile = "*";

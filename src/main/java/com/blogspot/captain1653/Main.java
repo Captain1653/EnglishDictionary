@@ -2,6 +2,7 @@ package com.blogspot.captain1653;
 
 import com.blogspot.captain1653.configreader.ConfigReader;
 import com.blogspot.captain1653.configreader.PropertyConfigReader;
+import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.mode.QuestionStrategy;
 import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 import com.blogspot.captain1653.wordsstream.WordsStream;
@@ -26,9 +27,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         QuestionStrategyFactory questionStrategyFactory = new QuestionStrategyFactory();
-        TypeWordPredicateFactory typeWordPredicateFactory = new TypeWordPredicateFactory();
-        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, typeWordPredicateFactory);
-        Configuration configuration = configReader.readConfiguration(System.getProperty(PATH_TO_CONFIG.get()));
+        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, TypeWordPredicateFactory.createFactory());
+        Configuration configuration = configReader.readConfiguration(System.getProperty(PATH_TO_CONFIG.get(),"/home/andrey/Others/english/config.properties"));
         QuestionStrategy questionStrategy = configuration.getQuestionStrategy();
 
         Predicate<String> typeWordPredicate = configuration.getTypeWordPredicate();

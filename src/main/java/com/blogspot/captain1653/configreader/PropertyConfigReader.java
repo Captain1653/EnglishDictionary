@@ -2,7 +2,7 @@ package com.blogspot.captain1653.configreader;
 
 import com.blogspot.captain1653.Configuration;
 import com.blogspot.captain1653.ExternalProperty;
-import com.blogspot.captain1653.TypeWordPredicateFactory;
+import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.mode.QuestionStrategy;
 import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 
