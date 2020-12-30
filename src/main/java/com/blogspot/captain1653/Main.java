@@ -28,7 +28,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         QuestionStrategyFactory questionStrategyFactory = new QuestionStrategyFactory();
         ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, TypeWordPredicateFactory.createFactory());
-        Configuration configuration = configReader.readConfiguration(System.getProperty(PATH_TO_CONFIG.get(),"/home/andrey/Others/english/config.properties"));
+        Configuration configuration = configReader.readConfiguration(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.properties"));
         QuestionStrategy questionStrategy = configuration.getQuestionStrategy();
 
         Predicate<String> typeWordPredicate = configuration.getTypeWordPredicate();

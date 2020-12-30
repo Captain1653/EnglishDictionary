@@ -1,47 +1,11 @@
 package com.blogspot.captain1653;
 
-public enum ExternalProperty {
+public class ExternalProperty {
 
-    FILES {
-        @Override
-        public String get() {
-            return "files";
-        }
-    },
-
-    MODE {
-        @Override
-        public String get() {
-            return "mode";
-        }
-    },
-    PATH_TO_CONFIG {
-        @Override
-        public String get() {
-            return "config";
-        }
-    },
-
-    TYPE_WORD {
-        @Override
-        public String get() {
-            return "type-word";
-        }
-    },
-
-    FOLDER {
-        @Override
-        public String get() {
-            return "folder";
-        }
-    },
-
-    ORDER {
-        @Override
-        public String get() {
-            return "order";
-        }
-    };
-
-    public abstract String get();
+    public static final String FILES = "files";
+    public static final String MODE = "mode";
+    public static final String PATH_TO_CONFIG="config";
+    public static final String TYPE_WORD="type-word";
+    public static final String FOLDER="folder";
+    public static final String ORDER="order";
 }

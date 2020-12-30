@@ -37,21 +37,21 @@ public class PropertyConfigReader implements ConfigReader {
         }
         Configuration configuration = new Configuration();
 
-        String mode = properties.getProperty(MODE.get());
+        String mode = properties.getProperty(MODE);
         QuestionStrategy questionStrategy = questionStrategyFactory.create(mode);
         configuration.setQuestionStrategy(questionStrategy);
 
-        String[] fileNamesWithWords = properties.getProperty(FILES.get()).split(SEPARATOR_FOR_FILES);
+        String[] fileNamesWithWords = properties.getProperty(FILES).split(SEPARATOR_FOR_FILES);
         configuration.setPathFiles(fileNamesWithWords);
 
-        String typeWord = properties.getProperty(TYPE_WORD.get());
+        String typeWord = properties.getProperty(TYPE_WORD);
         Predicate<String> predicate = typeWordPredicateFactory.create(typeWord);
         configuration.setTypeWordPredicate(predicate);
 
-        String folderForFiles = properties.getProperty(FOLDER.get(),EMPTY_VALUE_FOLDER_FOR_FILES);
+        String folderForFiles = properties.getProperty(FOLDER,EMPTY_VALUE_FOLDER_FOR_FILES);
         configuration.setFolderForFiles(folderForFiles);
 
-        String order = properties.getProperty(ExternalProperty.ORDER.get());
+        String order = properties.getProperty(ExternalProperty.ORDER);
         configuration.setOrder(order);
 
         return configuration;
