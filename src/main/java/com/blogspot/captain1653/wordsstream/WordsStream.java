@@ -1,7 +1,7 @@
 package com.blogspot.captain1653.wordsstream;
 
-import com.blogspot.captain1653.WordWithTranslation;
+import com.blogspot.captain1653.dictionary.scala.Word;
 
 public interface WordsStream {
-    WordWithTranslation nextWord();
+    Word nextWord();
 }

@@ -1,9 +1,9 @@
 package com.blogspot.captain1653.wordscreator;
 
-import com.blogspot.captain1653.WordWithTranslation;
+import com.blogspot.captain1653.dictionary.scala.Word;
 
 import java.util.List;
 
 public interface WordsCreator {
-    List<WordWithTranslation> create(List<String> lines);
+    List<Word> create(List<String> lines);
 }

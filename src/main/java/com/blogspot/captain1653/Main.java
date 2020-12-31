@@ -3,6 +3,7 @@ package com.blogspot.captain1653;
 import com.blogspot.captain1653.configreader.ConfigReader;
 import com.blogspot.captain1653.configreader.PropertyConfigReader;
 import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
+import com.blogspot.captain1653.dictionary.scala.Word;
 import com.blogspot.captain1653.mode.QuestionStrategy;
 import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 import com.blogspot.captain1653.wordsstream.WordsStream;
@@ -35,7 +36,7 @@ public class Main {
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> lines = wordsReader.getWords(configuration, typeWordPredicate);
         WordsCreator wordsCreator = new SimpleWordsCreator();
-        List<WordWithTranslation> words = wordsCreator.create(lines);
+        List<Word> words = wordsCreator.create(lines);
 
         String wordsOrder = configuration.getOrder();
         WordsStreamFactory wordsStreamFactory = new WordsStreamFactory();
@@ -46,14 +47,14 @@ public class Main {
 
         int countQuestion = 0;
         while (true) {
-            WordWithTranslation wordWithTranslation = wordsStream.nextWord();
-            String answerFromUser = questionStrategy.askQuestion(scanner, wordWithTranslation);
-            String rightAnswer = questionStrategy.getRightAnswer(wordWithTranslation);
+            Word word = wordsStream.nextWord();
+            String answerFromUser = questionStrategy.askQuestion(scanner, word);
+            String rightAnswer = questionStrategy.getRightAnswer(word);
 
             if (EXIT_VALUE.equals(answerFromUser)) {
-                System.out.println(String.format("Count question is: %d", countQuestion));
+                System.out.printf("Count question is: %d%n", countQuestion);
                 int countMistakes = wordsWithMistakes.size();
-                System.out.println(String.format("You have done %d mistakes", countMistakes));
+                System.out.printf("You have done %d mistakes%n", countMistakes);
                 if (countMistakes > 0) {
                     System.out.println("Words: are: " + String.join(",   ", wordsWithMistakes));
                 }

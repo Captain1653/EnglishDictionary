@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.wordsstream;
 
-import com.blogspot.captain1653.WordWithTranslation;
+import com.blogspot.captain1653.dictionary.scala.Word;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,49 +12,49 @@ class SequenceWordsStreamTest {
 
     @Test
     void getOneWord() {
-        WordWithTranslation firstWord = new WordWithTranslation("house=дом");
+        Word firstWord = new Word("house=дом");
         WordsStream wordsStream = new SequenceWordsStream(Collections.singletonList(firstWord));
 
-        WordWithTranslation firstActual = wordsStream.nextWord();
+        Word firstActual = wordsStream.nextWord();
 
-        assertEquals("house", firstActual.getEnglish());
-        assertEquals("дом", firstActual.getRussian());
+        assertEquals("house", firstActual.english());
+        assertEquals("дом", firstActual.russian());
     }
 
     @Test
     void getTwoWords() {
-        WordWithTranslation firstWord = new WordWithTranslation("house=дом");
-        WordWithTranslation secondWord = new WordWithTranslation("mouse=мышь");
+        Word firstWord = new Word("house=дом");
+        Word secondWord = new Word("mouse=мышь");
         WordsStream wordsStream = new SequenceWordsStream(Arrays.asList(firstWord, secondWord));
 
-        WordWithTranslation firstActual = wordsStream.nextWord();
+        Word firstActual = wordsStream.nextWord();
 
-        assertEquals("house", firstActual.getEnglish());
-        assertEquals("дом", firstActual.getRussian());
+        assertEquals("house", firstActual.english());
+        assertEquals("дом", firstActual.russian());
 
-        WordWithTranslation secondActual = wordsStream.nextWord();
-        assertEquals("mouse", secondActual.getEnglish());
-        assertEquals("мышь", secondActual.getRussian());
+        Word secondActual = wordsStream.nextWord();
+        assertEquals("mouse", secondActual.english());
+        assertEquals("мышь", secondActual.russian());
     }
 
     @Test
     void startInLoopAfterLastWord() {
-        WordWithTranslation firstWord = new WordWithTranslation("house=дом");
-        WordWithTranslation secondWord = new WordWithTranslation("mouse=мышь");
+        Word firstWord = new Word("house=дом");
+        Word secondWord = new Word("mouse=мышь");
         WordsStream wordsStream = new SequenceWordsStream(Arrays.asList(firstWord, secondWord));
 
-        WordWithTranslation firstActual = wordsStream.nextWord();
+        Word firstActual = wordsStream.nextWord();
 
-        assertEquals("house", firstActual.getEnglish());
-        assertEquals("дом", firstActual.getRussian());
+        assertEquals("house", firstActual.english());
+        assertEquals("дом", firstActual.russian());
 
-        WordWithTranslation secondActual = wordsStream.nextWord();
-        assertEquals("mouse", secondActual.getEnglish());
-        assertEquals("мышь", secondActual.getRussian());
+        Word secondActual = wordsStream.nextWord();
+        assertEquals("mouse", secondActual.english());
+        assertEquals("мышь", secondActual.russian());
 
-        WordWithTranslation thirdActual = wordsStream.nextWord();
+        Word thirdActual = wordsStream.nextWord();
 
-        assertEquals("house", thirdActual.getEnglish());
-        assertEquals("дом", thirdActual.getRussian());
+        assertEquals("house", thirdActual.english());
+        assertEquals("дом", thirdActual.russian());
     }
 }

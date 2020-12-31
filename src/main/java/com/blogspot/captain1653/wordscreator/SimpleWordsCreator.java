@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.wordscreator;
 
-import com.blogspot.captain1653.WordWithTranslation;
+import com.blogspot.captain1653.dictionary.scala.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ public class SimpleWordsCreator implements WordsCreator {
     private static final String DELIMITER_TYPE_WORD = ";";
 
     @Override
-    public List<WordWithTranslation> create(List<String> lines) {
-        List<WordWithTranslation> words = new ArrayList<>();
+    public List<Word> create(List<String> lines) {
+        List<Word> words = new ArrayList<>();
         for (String line : lines) {
             String englishAndRussianWords;
             if (line.contains(DELIMITER_TYPE_WORD)) {
@@ -19,8 +19,7 @@ public class SimpleWordsCreator implements WordsCreator {
             } else {
                 englishAndRussianWords = line;
             }
-            WordWithTranslation wordWithTranslation = new WordWithTranslation(englishAndRussianWords);
-            words.add(wordWithTranslation);
+            words.add(new Word(englishAndRussianWords));
         }
 
         return words;

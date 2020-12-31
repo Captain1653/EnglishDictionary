@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.wordsstream;
 
-import com.blogspot.captain1653.WordWithTranslation;
+import com.blogspot.captain1653.dictionary.scala.Word;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,19 +9,19 @@ import java.util.Random;
 
 public class RandomWordsStream implements WordsStream {
 
-    private Map<Integer,WordWithTranslation> words;
+    private Map<Integer, Word> words;
 
-    public RandomWordsStream(List<WordWithTranslation> wordsWithTranslations) {
+    public RandomWordsStream(List<Word> wordsWithTranslations) {
         this.words = new HashMap<>();
         int i = 1;
-        for (WordWithTranslation word : wordsWithTranslations) {
+        for (Word word : wordsWithTranslations) {
             words.put(i, word);
             i++;
         }
     }
 
     @Override
-    public WordWithTranslation nextWord() {
+    public Word nextWord() {
         return words.get(new Random(System.nanoTime()).nextInt(words.size()) + 1);
     }
 }
