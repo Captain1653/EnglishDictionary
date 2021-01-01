@@ -18,14 +18,12 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static com.blogspot.captain1653.ExternalProperty.PATH_TO_CONFIG;
-
 public class Main {
 
     private static final String EXIT_VALUE = "exit";
 
     public static void main(String[] args) throws IOException {
-        RawConfigReader configReader = new ConfFileRawConfigReader(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.conf"));
+        RawConfigReader configReader = new ConfFileRawConfigReader(args[0]);
         RawConfig rawConfig = configReader.read();
         RawConfigParser rawConfigParser = new RawConfigParser(rawConfig);
         DictionaryConfig dictionaryConfig = rawConfigParser.parse();
