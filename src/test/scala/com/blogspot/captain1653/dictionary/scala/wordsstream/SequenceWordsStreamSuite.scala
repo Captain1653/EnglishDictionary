@@ -1,15 +1,15 @@
 package com.blogspot.captain1653.dictionary.scala.wordsstream
 
-import com.blogspot.captain1653.dictionary.scala.Word
+import com.blogspot.captain1653.dictionary.scala.{Word, WordsOrder}
 import org.scalatest.funsuite.AnyFunSuite
 
 import java.util
 import java.util.Collections
 
-class SequenceWordsStreamSuite extends AnyFunSuite{
+class SequenceWordsStreamSuite extends AnyFunSuite {
 
-  test("get one word"){
-    val wordsStream = WordsStreamFactory.apply(Collections.singletonList(new Word("house=дом")),"seq")
+  test("get one word") {
+    val wordsStream = WordsStreamFactory.apply(Collections.singletonList(new Word("house=дом")), WordsOrder.SEQUENTIAL)
     val firstActual = wordsStream.nextWord()
     assert("house" == firstActual.english)
     assert("дом" == firstActual.russian)
@@ -18,7 +18,7 @@ class SequenceWordsStreamSuite extends AnyFunSuite{
   test("get two words") {
     val firstWord = new Word("house=дом")
     val secondWord = new Word("mouse=мышь")
-    val wordsStream = WordsStreamFactory.apply(util.Arrays.asList(firstWord, secondWord),"seq")
+    val wordsStream = WordsStreamFactory.apply(util.Arrays.asList(firstWord, secondWord), WordsOrder.SEQUENTIAL)
     val firstActual = wordsStream.nextWord()
     assert("house" == firstActual.english)
     assert("дом" == firstActual.russian)
@@ -30,7 +30,7 @@ class SequenceWordsStreamSuite extends AnyFunSuite{
   test("start in loop after last word") {
     val firstWord = new Word("house=дом")
     val secondWord = new Word("mouse=мышь")
-    val wordsStream = WordsStreamFactory.apply(util.Arrays.asList(firstWord, secondWord),"seq")
+    val wordsStream = WordsStreamFactory.apply(util.Arrays.asList(firstWord, secondWord), WordsOrder.SEQUENTIAL)
 
     val firstActual = wordsStream.nextWord()
     assert("house" == firstActual.english)

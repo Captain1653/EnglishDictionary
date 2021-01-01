@@ -1,8 +1,6 @@
 package com.blogspot.captain1653;
 
-import com.blogspot.captain1653.dictionary.scala.RawConfig;
-import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
-import com.blogspot.captain1653.dictionary.scala.Word;
+import com.blogspot.captain1653.dictionary.scala.*;
 import com.blogspot.captain1653.dictionary.scala.configreader.ConfFileRawConfigReader;
 import com.blogspot.captain1653.dictionary.scala.configreader.RawConfigReader;
 import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategy;
@@ -28,15 +26,17 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         RawConfigReader configReader = new ConfFileRawConfigReader(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.conf"));
-        RawConfig configuration = configReader.read();
-        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(configuration.questionStrategy());
+        RawConfig rawConfig = configReader.read();
+        RawConfigParser rawConfigParser = new RawConfigParser(rawConfig);
+        DictionaryConfig dictionaryConfig = rawConfigParser.parse();
+        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(rawConfig.questionStrategy());
 
-        Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(configuration.typeWord());
+        Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(rawConfig.typeWord());
         WordsReader wordsReader = new TextFileWordsReader();
-        List<String> lines = wordsReader.getWords(configuration, typeWordPredicate);
+        List<String> lines = wordsReader.getWords(rawConfig, typeWordPredicate);
         List<Word> words = lines.stream().map(Word::new).collect(Collectors.toList());
 
-        WordsStream wordsStream = WordsStreamFactory.apply(words, configuration.order());
+        WordsStream wordsStream = WordsStreamFactory.apply(words, dictionaryConfig.order());
 
         Scanner scanner = new Scanner(System.in);
         Set<String> wordsWithMistakes = new HashSet<>();
