@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.wordsreader;
 
-import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class TextFileWordsStreamReaderTest {
     @Test
     void readAllTypesWords() throws IOException {
         String pathToFile = "wordsreader/readAllWords.txt";
-        DictionaryConfiguration configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
+        DictionaryConfig configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
         Predicate<String> typeWordPredicate = line -> true;
 
         WordsReader wordsReader = new TextFileWordsReader();
@@ -29,8 +29,8 @@ class TextFileWordsStreamReaderTest {
         assertEquals(expected, actual);
     }
 
-    private DictionaryConfiguration getConfigurationWithPathFile(String pathToFile, String folderForFiles) {
-        return new DictionaryConfiguration(
+    private DictionaryConfig getConfigurationWithPathFile(String pathToFile, String folderForFiles) {
+        return new DictionaryConfig(
                 "", new String[]{pathToFile}, "", folderForFiles, ""
         );
     }
@@ -38,7 +38,7 @@ class TextFileWordsStreamReaderTest {
     @Test
     void readOnlyNounsByPredicate() throws IOException {
         String pathToFile = "wordsreader/readNouns.txt";
-        DictionaryConfiguration configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
+        DictionaryConfig configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
         Predicate<String> typeWordPredicate = line -> line.startsWith("noun");
 
         WordsReader wordsReader = new TextFileWordsReader();
@@ -51,7 +51,7 @@ class TextFileWordsStreamReaderTest {
     @Test
     void skipEmptyLinesFromFile() throws IOException {
         String pathToFile = "wordsreader/skipEmptyLinesFromFile.txt";
-        DictionaryConfiguration configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
+        DictionaryConfig configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
         Predicate<String> typeWordPredicate = line -> true;
 
         WordsReader wordsReader = new TextFileWordsReader();
@@ -66,7 +66,7 @@ class TextFileWordsStreamReaderTest {
     void readAllFilesInTheFolderWhenPathToFilesIsStar() throws IOException {
         String pathToFile = "*";
         String folderWithFiles = TEST_RESOURCES + "wordsreader/readAllFilesInFolder/";
-        DictionaryConfiguration configuration = getConfigurationWithPathFile(pathToFile, folderWithFiles);
+        DictionaryConfig configuration = getConfigurationWithPathFile(pathToFile, folderWithFiles);
         Predicate<String> typeWordPredicate = line -> true;
 
         WordsReader wordsReader = new TextFileWordsReader();

@@ -1,10 +1,10 @@
 package com.blogspot.captain1653;
 
-import com.blogspot.captain1653.configreader.ConfigReader;
-import com.blogspot.captain1653.configreader.PropertyConfigReader;
-import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfig;
 import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.dictionary.scala.Word;
+import com.blogspot.captain1653.dictionary.scala.configreader.ConfFileDictionaryConfigReader;
+import com.blogspot.captain1653.dictionary.scala.configreader.DictionaryConfigReader;
 import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategy;
 import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategyFactory;
 import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStream;
@@ -27,8 +27,8 @@ public class Main {
     private static final String EXIT_VALUE = "exit";
 
     public static void main(String[] args) throws IOException {
-        ConfigReader configReader = new PropertyConfigReader(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.properties"));
-        DictionaryConfiguration configuration = configReader.readConfiguration();
+        DictionaryConfigReader configReader = new ConfFileDictionaryConfigReader(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.conf"));
+        DictionaryConfig configuration = configReader.read();
         QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(configuration.questionStrategy());
 
         Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(configuration.typeWord());

@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.wordsreader;
 
-import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class TextFileWordsReader implements WordsReader {
     private static final String DELIMITER_TYPE_WORD = ";";
 
     @Override
-    public List<String> getWords(DictionaryConfiguration configuration, Predicate<String> typeWordPredicate) throws IOException {
+    public List<String> getWords(DictionaryConfig configuration, Predicate<String> typeWordPredicate) throws IOException {
         List<String> lines = new ArrayList<>();
         String folderForFiles = configuration.folderForFiles();
 

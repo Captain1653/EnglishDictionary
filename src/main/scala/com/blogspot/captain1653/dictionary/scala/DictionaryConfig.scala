@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.dictionary.scala
 
-case class DictionaryConfiguration(
+case class DictionaryConfig(
                                questionStrategy: String,
                                pathFiles: Array[String],
                                typeWord: String,
