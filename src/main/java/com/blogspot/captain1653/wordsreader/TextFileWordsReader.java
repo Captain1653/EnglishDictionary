@@ -13,6 +13,7 @@ import com.blogspot.captain1653.Configuration;
 public class TextFileWordsReader implements WordsReader {
 
     private static final String EMPTY_LINE = "";
+    private static final String DELIMITER_TYPE_WORD = ";";
 
     @Override
     public List<String> getWords(Configuration configuration, Predicate<String> typeWordPredicate) throws IOException {
@@ -27,9 +28,9 @@ public class TextFileWordsReader implements WordsReader {
             String fullPathToFile = folderForFiles + path;
             try (Scanner scanner = new Scanner(new File(fullPathToFile))) {
                 while (scanner.hasNextLine()) {
-                    String lineWithWords = scanner.nextLine();
-                    if (isAppropriateLine(typeWordPredicate, lineWithWords)) {
-                        lines.add(lineWithWords);
+                    String line = scanner.nextLine();
+                    if (isAppropriateLine(typeWordPredicate, line)) {
+                        lines.add(line.contains(DELIMITER_TYPE_WORD) ? line.split(DELIMITER_TYPE_WORD)[1] : line);
                     }
                 }
             }

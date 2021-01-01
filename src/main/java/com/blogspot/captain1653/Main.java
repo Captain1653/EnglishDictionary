@@ -8,8 +8,6 @@ import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrate
 import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategyFactory;
 import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStream;
 import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStreamFactory;
-import com.blogspot.captain1653.wordscreator.SimpleWordsCreator;
-import com.blogspot.captain1653.wordscreator.WordsCreator;
 import com.blogspot.captain1653.wordsreader.TextFileWordsReader;
 import com.blogspot.captain1653.wordsreader.WordsReader;
 
@@ -19,6 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static com.blogspot.captain1653.ExternalProperty.PATH_TO_CONFIG;
 
@@ -34,8 +33,7 @@ public class Main {
         Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(configuration.getTypeWord());
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> lines = wordsReader.getWords(configuration, typeWordPredicate);
-        WordsCreator wordsCreator = new SimpleWordsCreator();
-        List<Word> words = wordsCreator.create(lines);
+        List<Word> words = lines.stream().map(Word::new).collect(Collectors.toList());
 
         WordsStream wordsStream = WordsStreamFactory.apply(words, configuration.getOrder());
 

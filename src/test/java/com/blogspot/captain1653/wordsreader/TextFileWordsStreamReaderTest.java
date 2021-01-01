@@ -25,7 +25,7 @@ class TextFileWordsStreamReaderTest {
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
 
-        List<String> expected = Arrays.asList("noun;house=дом", "adjective;next=следующий");
+        List<String> expected = Arrays.asList("house=дом", "next=следующий");
         assertEquals(expected, actual);
     }
 
@@ -45,7 +45,7 @@ class TextFileWordsStreamReaderTest {
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
 
-        List<String> expected = Collections.singletonList("noun;house=дом");
+        List<String> expected = Collections.singletonList("house=дом");
         assertEquals(expected, actual);
     }
 
@@ -58,7 +58,7 @@ class TextFileWordsStreamReaderTest {
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
 
-        List<String> expected = Arrays.asList("noun;house=дом", "adjective;next=следующий");
+        List<String> expected = Arrays.asList("house=дом", "next=следующий");
         assertEquals(expected, actual);
     }
 
@@ -73,7 +73,7 @@ class TextFileWordsStreamReaderTest {
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
 
-        List<String> expected = Arrays.asList("verb;build=строить", "noun;house=дом");
+        List<String> expected = Arrays.asList("build=строить", "house=дом");
         assertEquals(expected, actual);
     }
 }
