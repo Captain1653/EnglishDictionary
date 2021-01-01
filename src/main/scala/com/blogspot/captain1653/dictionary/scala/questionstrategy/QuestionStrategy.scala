@@ -1,15 +1,15 @@
 package com.blogspot.captain1653.dictionary.scala.questionstrategy
 
-import com.blogspot.captain1653.dictionary.scala.Word
+import com.blogspot.captain1653.dictionary.scala.{QuestionStrategyType, Word}
 
 import scala.util.Random
 
 object QuestionStrategyFactory {
 
-  def apply(questionStrategy: String): QuestionStrategy = questionStrategy match {
-    case "ru" => new RussianQuestionStrategy()
-    case "mix" => new MixQuestionStrategy()
-    case "en" => new EnglishQuestionStrategy()
+  def apply(questionStrategyType: QuestionStrategyType.Value): QuestionStrategy = questionStrategyType match {
+    case QuestionStrategyType.RUSSIAN => new RussianQuestionStrategy()
+    case QuestionStrategyType.MIX => new MixQuestionStrategy()
+    case QuestionStrategyType.ENGLISH => new EnglishQuestionStrategy()
   }
 
   private class RussianQuestionStrategy extends QuestionStrategy {

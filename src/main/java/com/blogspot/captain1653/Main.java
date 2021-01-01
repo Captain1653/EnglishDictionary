@@ -29,7 +29,7 @@ public class Main {
         RawConfig rawConfig = configReader.read();
         RawConfigParser rawConfigParser = new RawConfigParser(rawConfig);
         DictionaryConfig dictionaryConfig = rawConfigParser.parse();
-        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(rawConfig.questionStrategy());
+        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(dictionaryConfig.questionStrategyType());
 
         Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(rawConfig.typeWord());
         WordsReader wordsReader = new TextFileWordsReader();

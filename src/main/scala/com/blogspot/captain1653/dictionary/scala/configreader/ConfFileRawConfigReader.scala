@@ -7,13 +7,19 @@ import java.io.File
 
 class ConfFileRawConfigReader(pathToConfig: String) extends RawConfigReader {
 
+  private val TYPE_WORD = "type-word"
+  private val FOLDER = "folder"
+  private val ORDER = "order"
+  private val FILES = "files"
+  private val MODE = "mode"
+
   override def read(): RawConfig = {
     val config = ConfigFactory.parseFile(new File(pathToConfig)).getConfig("english.dictionary")
     RawConfig(
-      folderForFiles = if (config.hasPath("folder")) config.getString("folder") else "",
-      pathFiles = config.getString("files").split(","),
-      questionStrategy = config.getString("mode"),
-      typeWord = config.getString("type-word"),
-      order = config.getString("order"))
+      folderForFiles = if (config.hasPath(FOLDER)) config.getString(FOLDER) else "",
+      pathFiles = config.getString(FILES).split(","),
+      questionStrategy = config.getString(MODE),
+      typeWord = config.getString(TYPE_WORD),
+      order = config.getString(ORDER))
   }
 }

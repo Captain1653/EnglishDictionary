@@ -8,8 +8,16 @@ class RawConfigParser(rawConfig: RawConfig) {
 
   def parse(): DictionaryConfig = {
     DictionaryConfig(
-      order = if (SEQUENTIAL_WORDS_ORDER == rawConfig.order) SEQUENTIAL else RANDOM
+      order = if (SEQUENTIAL_WORDS_ORDER == rawConfig.order) SEQUENTIAL else RANDOM,
+      questionStrategyType = parseQuestionStrategy(rawConfig.questionStrategy)
     )
   }
+
+  private def parseQuestionStrategy(questionStrategy: String): QuestionStrategyType.Value = questionStrategy match {
+    case "ru" => QuestionStrategyType.RUSSIAN
+    case "en" => QuestionStrategyType.ENGLISH
+    case "mix" => QuestionStrategyType.MIX
+  }
+
 
 }
