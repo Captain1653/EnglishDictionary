@@ -6,7 +6,7 @@ import java.util.function.Predicate
 
 class TypeWordPredicateFactorySuite extends AnyFunSuite {
 
-  private val TYPE_WORD_PREDICATE_FACTORY = TypeWordPredicateFactory.createFactory()
+  private val TYPE_WORD_PREDICATE_FACTORY = TypeWordPredicateFactory.apply()
 
   test("return predicate for noun") {
     val predicate: Predicate[String]  = TYPE_WORD_PREDICATE_FACTORY.create("noun")

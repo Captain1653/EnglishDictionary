@@ -6,7 +6,7 @@ public class Configuration {
 
     private String questionStrategy;
     private String[] pathFiles;
-    private Predicate<String> typeWordPredicate;
+    private String typeWord;
     private String folderForFiles;
     private String order;
 
@@ -28,12 +28,12 @@ public class Configuration {
     }
 
 
-    public void setTypeWordPredicate(Predicate<String> typeWordPredicate) {
-        this.typeWordPredicate = typeWordPredicate;
+    public void setTypeWord(String typeWord) {
+        this.typeWord = typeWord;
     }
 
-    public Predicate<String> getTypeWordPredicate() {
-        return typeWordPredicate;
+    public String getTypeWord() {
+        return typeWord;
     }
 
     public void setFolderForFiles(String folderForFiles) {

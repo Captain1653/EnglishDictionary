@@ -27,11 +27,11 @@ public class Main {
     private static final String EXIT_VALUE = "exit";
 
     public static void main(String[] args) throws IOException {
-        ConfigReader configReader = new PropertyConfigReader(TypeWordPredicateFactory.createFactory());
-        Configuration configuration = configReader.readConfiguration(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.properties"));
+        ConfigReader configReader = new PropertyConfigReader(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.properties"));
+        Configuration configuration = configReader.readConfiguration();
         QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(configuration.getQuestionStrategy());
 
-        Predicate<String> typeWordPredicate = configuration.getTypeWordPredicate();
+        Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(configuration.getTypeWord());
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> lines = wordsReader.getWords(configuration, typeWordPredicate);
         WordsCreator wordsCreator = new SimpleWordsCreator();

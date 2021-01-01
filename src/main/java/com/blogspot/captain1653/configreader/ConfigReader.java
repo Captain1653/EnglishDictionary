@@ -6,5 +6,5 @@ import com.blogspot.captain1653.Configuration;
 
 public interface ConfigReader {
 
-    Configuration readConfiguration(String pathToFile) throws IOException;
+    Configuration readConfiguration() throws IOException;
 }

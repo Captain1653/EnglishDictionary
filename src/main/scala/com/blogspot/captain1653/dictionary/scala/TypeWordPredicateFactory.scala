@@ -5,7 +5,7 @@ import java.util.function.Predicate
 object TypeWordPredicateFactory {
   private def TYPES = List("noun", "adjective", "adverb", "verb")
 
-  def createFactory(): TypeWordPredicateFactory = new TypeWordPredicateFactory(TYPES)
+  def apply(): TypeWordPredicateFactory = new TypeWordPredicateFactory(TYPES)
 
 }
 
