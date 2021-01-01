@@ -3,8 +3,6 @@ package com.blogspot.captain1653.configreader;
 import com.blogspot.captain1653.Configuration;
 import com.blogspot.captain1653.ExternalProperty;
 import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
-import com.blogspot.captain1653.mode.QuestionStrategy;
-import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,12 +17,9 @@ public class PropertyConfigReader implements ConfigReader {
     private static final String EMPTY_VALUE_FOLDER_FOR_FILES = "";
     private static final String SEPARATOR_FOR_FILES = ",";
 
-    private QuestionStrategyFactory questionStrategyFactory;
     private TypeWordPredicateFactory typeWordPredicateFactory;
 
-    public PropertyConfigReader(QuestionStrategyFactory questionStrategyFactory,
-                                TypeWordPredicateFactory typeWordPredicateFactory) {
-        this.questionStrategyFactory = questionStrategyFactory;
+    public PropertyConfigReader(TypeWordPredicateFactory typeWordPredicateFactory) {
         this.typeWordPredicateFactory = typeWordPredicateFactory;
     }
 
@@ -37,9 +32,7 @@ public class PropertyConfigReader implements ConfigReader {
         }
         Configuration configuration = new Configuration();
 
-        String mode = properties.getProperty(MODE);
-        QuestionStrategy questionStrategy = questionStrategyFactory.create(mode);
-        configuration.setQuestionStrategy(questionStrategy);
+        configuration.setQuestionStrategy(properties.getProperty(MODE));
 
         String[] fileNamesWithWords = properties.getProperty(FILES).split(SEPARATOR_FOR_FILES);
         configuration.setPathFiles(fileNamesWithWords);

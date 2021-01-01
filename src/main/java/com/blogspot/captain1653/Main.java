@@ -4,10 +4,10 @@ import com.blogspot.captain1653.configreader.ConfigReader;
 import com.blogspot.captain1653.configreader.PropertyConfigReader;
 import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.dictionary.scala.Word;
+import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategy;
+import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategyFactory;
 import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStream;
 import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStreamFactory;
-import com.blogspot.captain1653.mode.QuestionStrategy;
-import com.blogspot.captain1653.mode.QuestionStrategyFactory;
 import com.blogspot.captain1653.wordscreator.SimpleWordsCreator;
 import com.blogspot.captain1653.wordscreator.WordsCreator;
 import com.blogspot.captain1653.wordsreader.TextFileWordsReader;
@@ -27,10 +27,9 @@ public class Main {
     private static final String EXIT_VALUE = "exit";
 
     public static void main(String[] args) throws IOException {
-        QuestionStrategyFactory questionStrategyFactory = new QuestionStrategyFactory();
-        ConfigReader configReader = new PropertyConfigReader(questionStrategyFactory, TypeWordPredicateFactory.createFactory());
+        ConfigReader configReader = new PropertyConfigReader(TypeWordPredicateFactory.createFactory());
         Configuration configuration = configReader.readConfiguration(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.properties"));
-        QuestionStrategy questionStrategy = configuration.getQuestionStrategy();
+        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(configuration.getQuestionStrategy());
 
         Predicate<String> typeWordPredicate = configuration.getTypeWordPredicate();
         WordsReader wordsReader = new TextFileWordsReader();

@@ -1,23 +1,21 @@
 package com.blogspot.captain1653;
 
-import com.blogspot.captain1653.mode.QuestionStrategy;
-
 import java.util.function.Predicate;
 
 public class Configuration {
 
-    private QuestionStrategy questionStrategy;
+    private String questionStrategy;
     private String[] pathFiles;
     private Predicate<String> typeWordPredicate;
     private String folderForFiles;
     private String order;
 
 
-    public QuestionStrategy getQuestionStrategy() {
+    public String getQuestionStrategy() {
         return questionStrategy;
     }
 
-    public void setQuestionStrategy(QuestionStrategy questionStrategy) {
+    public void setQuestionStrategy(String questionStrategy) {
         this.questionStrategy = questionStrategy;
     }
 
