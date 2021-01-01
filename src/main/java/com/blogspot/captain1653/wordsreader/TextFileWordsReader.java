@@ -1,5 +1,7 @@
 package com.blogspot.captain1653.wordsreader;
 
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,21 +10,19 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import com.blogspot.captain1653.Configuration;
-
 public class TextFileWordsReader implements WordsReader {
 
     private static final String EMPTY_LINE = "";
     private static final String DELIMITER_TYPE_WORD = ";";
 
     @Override
-    public List<String> getWords(Configuration configuration, Predicate<String> typeWordPredicate) throws IOException {
+    public List<String> getWords(DictionaryConfiguration configuration, Predicate<String> typeWordPredicate) throws IOException {
         List<String> lines = new ArrayList<>();
-        String folderForFiles = configuration.getFolderForFiles();
+        String folderForFiles = configuration.folderForFiles();
 
-        String[] pathFiles = "*".equals(configuration.getPathFiles()[0]) ?
+        String[] pathFiles = "*".equals(configuration.pathFiles()[0]) ?
                              getAllFilesInFolder(folderForFiles) :
-                             configuration.getPathFiles();
+                             configuration.pathFiles();
 
         for (String path : pathFiles) {
             String fullPathToFile = folderForFiles + path;

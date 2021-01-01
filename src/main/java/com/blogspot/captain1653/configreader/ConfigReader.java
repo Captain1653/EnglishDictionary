@@ -1,10 +1,10 @@
 package com.blogspot.captain1653.configreader;
 
-import java.io.IOException;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
 
-import com.blogspot.captain1653.Configuration;
+import java.io.IOException;
 
 public interface ConfigReader {
 
-    Configuration readConfiguration() throws IOException;
+    DictionaryConfiguration readConfiguration() throws IOException;
 }

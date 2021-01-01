@@ -1,7 +1,7 @@
 package com.blogspot.captain1653.configreader;
 
-import com.blogspot.captain1653.Configuration;
 import com.blogspot.captain1653.ExternalProperty;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,20 +22,19 @@ public class PropertyConfigReader implements ConfigReader {
     }
 
     @Override
-    public Configuration readConfiguration() throws IOException {
+    public DictionaryConfiguration readConfiguration() throws IOException {
         Properties properties;
         try (InputStream input = new FileInputStream(pathToConfigFile)) {
             properties = new Properties();
             properties.load(input);
         }
-        Configuration configuration = new Configuration();
-        configuration.setQuestionStrategy(properties.getProperty(MODE));
         String[] fileNamesWithWords = properties.getProperty(FILES).split(SEPARATOR_FOR_FILES);
-        configuration.setPathFiles(fileNamesWithWords);
-        configuration.setTypeWord(properties.getProperty(TYPE_WORD));
-        configuration.setFolderForFiles(properties.getProperty(FOLDER,EMPTY_VALUE_FOLDER_FOR_FILES));
-        configuration.setOrder(properties.getProperty(ExternalProperty.ORDER));
-
-        return configuration;
+        return new DictionaryConfiguration(
+                properties.getProperty(MODE),
+                fileNamesWithWords,
+                properties.getProperty(TYPE_WORD),
+                properties.getProperty(FOLDER,EMPTY_VALUE_FOLDER_FOR_FILES),
+                properties.getProperty(ExternalProperty.ORDER)
+        );
     }
 }

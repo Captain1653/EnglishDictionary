@@ -2,6 +2,7 @@ package com.blogspot.captain1653;
 
 import com.blogspot.captain1653.configreader.ConfigReader;
 import com.blogspot.captain1653.configreader.PropertyConfigReader;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
 import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.dictionary.scala.Word;
 import com.blogspot.captain1653.dictionary.scala.questionstrategy.QuestionStrategy;
@@ -27,15 +28,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ConfigReader configReader = new PropertyConfigReader(System.getProperty(PATH_TO_CONFIG,"/home/andrey/Others/english/config.properties"));
-        Configuration configuration = configReader.readConfiguration();
-        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(configuration.getQuestionStrategy());
+        DictionaryConfiguration configuration = configReader.readConfiguration();
+        QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(configuration.questionStrategy());
 
-        Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(configuration.getTypeWord());
+        Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(configuration.typeWord());
         WordsReader wordsReader = new TextFileWordsReader();
         List<String> lines = wordsReader.getWords(configuration, typeWordPredicate);
         List<Word> words = lines.stream().map(Word::new).collect(Collectors.toList());
 
-        WordsStream wordsStream = WordsStreamFactory.apply(words, configuration.getOrder());
+        WordsStream wordsStream = WordsStreamFactory.apply(words, configuration.order());
 
         Scanner scanner = new Scanner(System.in);
         Set<String> wordsWithMistakes = new HashSet<>();

@@ -1,11 +1,12 @@
 package com.blogspot.captain1653.configreader;
 
-import com.blogspot.captain1653.Configuration;
+import com.blogspot.captain1653.dictionary.scala.DictionaryConfiguration;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PropertyFileConfigReader {
 
@@ -13,21 +14,21 @@ class PropertyFileConfigReader {
     void readConfigWithAllParameters() throws IOException {
         String pathToFile = "src/test/resources/configreader/fullConfiguration.properties";
         ConfigReader configReader = new PropertyConfigReader(pathToFile);
-        Configuration configuration = configReader.readConfiguration();
+        DictionaryConfiguration configuration = configReader.readConfiguration();
 
-        assertEquals("someFolder/", configuration.getFolderForFiles());
-        assertArrayEquals(new String[]{"one.txt", "two.txt"}, configuration.getPathFiles());
-        assertEquals("ru", configuration.getQuestionStrategy());
-        assertEquals("noun", configuration.getTypeWord());
-        assertEquals("seq",configuration.getOrder());
+        assertEquals("someFolder/", configuration.folderForFiles());
+        assertArrayEquals(new String[]{"one.txt", "two.txt"}, configuration.pathFiles());
+        assertEquals("ru", configuration.questionStrategy());
+        assertEquals("noun", configuration.typeWord());
+        assertEquals("seq",configuration.order());
     }
 
     @Test
     void readConfigWithDefaultValueFolderEmptyString() throws IOException {
         String pathToFile = "src/test/resources/configreader/defaultValueFolderEmptyString.properties";
         ConfigReader configReader = new PropertyConfigReader(pathToFile);
-        Configuration configuration = configReader.readConfiguration();
+        DictionaryConfiguration configuration = configReader.readConfiguration();
 
-        assertEquals("", configuration.getFolderForFiles());
+        assertEquals("", configuration.folderForFiles());
     }
 }
