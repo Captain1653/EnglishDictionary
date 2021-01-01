@@ -4,10 +4,10 @@ import com.blogspot.captain1653.configreader.ConfigReader;
 import com.blogspot.captain1653.configreader.PropertyConfigReader;
 import com.blogspot.captain1653.dictionary.scala.TypeWordPredicateFactory;
 import com.blogspot.captain1653.dictionary.scala.Word;
+import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStream;
+import com.blogspot.captain1653.dictionary.scala.wordsstream.WordsStreamFactory;
 import com.blogspot.captain1653.mode.QuestionStrategy;
 import com.blogspot.captain1653.mode.QuestionStrategyFactory;
-import com.blogspot.captain1653.wordsstream.WordsStream;
-import com.blogspot.captain1653.wordsstream.WordsStreamFactory;
 import com.blogspot.captain1653.wordscreator.SimpleWordsCreator;
 import com.blogspot.captain1653.wordscreator.WordsCreator;
 import com.blogspot.captain1653.wordsreader.TextFileWordsReader;
@@ -38,9 +38,7 @@ public class Main {
         WordsCreator wordsCreator = new SimpleWordsCreator();
         List<Word> words = wordsCreator.create(lines);
 
-        String wordsOrder = configuration.getOrder();
-        WordsStreamFactory wordsStreamFactory = new WordsStreamFactory();
-        WordsStream wordsStream = wordsStreamFactory.get(words, wordsOrder);
+        WordsStream wordsStream = WordsStreamFactory.apply(words, configuration.getOrder());
 
         Scanner scanner = new Scanner(System.in);
         Set<String> wordsWithMistakes = new HashSet<>();
