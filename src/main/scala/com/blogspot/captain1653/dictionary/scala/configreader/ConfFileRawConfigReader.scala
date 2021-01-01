@@ -1,15 +1,15 @@
 package com.blogspot.captain1653.dictionary.scala.configreader
 
-import com.blogspot.captain1653.dictionary.scala.DictionaryConfig
+import com.blogspot.captain1653.dictionary.scala.RawConfig
 import com.typesafe.config.ConfigFactory
 
 import java.io.File
 
-class ConfFileDictionaryConfigReader(pathToConfig: String) extends DictionaryConfigReader {
+class ConfFileRawConfigReader(pathToConfig: String) extends RawConfigReader {
 
-  override def read(): DictionaryConfig = {
+  override def read(): RawConfig = {
     val config = ConfigFactory.parseFile(new File(pathToConfig)).getConfig("english.dictionary")
-    DictionaryConfig(
+    RawConfig(
       folderForFiles = if (config.hasPath("folder")) config.getString("folder") else "",
       pathFiles = config.getString("files").split(","),
       questionStrategy = config.getString("mode"),
