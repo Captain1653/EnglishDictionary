@@ -46,7 +46,9 @@ public class Main {
         int countQuestion = 0;
         while (true) {
             Word word = wordsStream.nextWord();
-            String answerFromUser = questionStrategy.askQuestion(scanner, word);
+            String question = questionStrategy.askQuestion(word);
+            System.out.println("Word: " + question);
+            String answerFromUser = scanner.nextLine();
             String rightAnswer = questionStrategy.getRightAnswer(word);
 
             if (EXIT_VALUE.equals(answerFromUser)) {
