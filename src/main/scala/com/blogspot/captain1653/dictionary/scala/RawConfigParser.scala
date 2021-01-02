@@ -1,18 +1,20 @@
 package com.blogspot.captain1653.dictionary.scala
 
-import com.blogspot.captain1653.dictionary.scala.WordsOrder.{RANDOM, SEQUENTIAL}
-
 class RawConfigParser(rawConfig: RawConfig) {
-
-  private val SEQUENTIAL_WORDS_ORDER = "seq"
 
   def parse(): DictionaryConfig = {
     DictionaryConfig(
-      order = if (SEQUENTIAL_WORDS_ORDER == rawConfig.order) SEQUENTIAL else RANDOM,
+      order = parseWordsOrder(rawConfig.order),
       questionStrategyType = parseQuestionStrategy(rawConfig.questionStrategy),
       folder = rawConfig.folderForFiles,
-      files = rawConfig.pathFiles
+      files = rawConfig.pathFiles,
+      wordsType = parseWordType(rawConfig.wordType)
     )
+  }
+
+  private def parseWordsOrder(wordsOrder: String): WordsOrder.Value = wordsOrder match {
+    case "seq" => WordsOrder.SEQUENTIAL
+    case "rand" => WordsOrder.RANDOM
   }
 
   private def parseQuestionStrategy(questionStrategy: String): QuestionStrategyType.Value = questionStrategy match {
@@ -21,5 +23,11 @@ class RawConfigParser(rawConfig: RawConfig) {
     case "mix" => QuestionStrategyType.MIX
   }
 
+  private def parseWordType(wordType: String): WordSearchCriteria = wordType match {
+    case "noun" => WordSearchCriteria("noun", WordType.NOUN)
+    case "verb" => WordSearchCriteria("verb", WordType.VERB)
+    case "adjective" => WordSearchCriteria("adjective", WordType.ADJECTIVE)
+    case "adverb" => WordSearchCriteria("adverb", WordType.ADVERB)
+  }
 
 }

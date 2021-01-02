@@ -18,10 +18,10 @@ object Main {
     val dictionaryConfig = rawConfigParser.parse()
 
     val questionStrategy = QuestionStrategyFactory(dictionaryConfig.questionStrategyType)
-    val typeWordPredicate = TypeWordPredicate(rawConfig.typeWord)
     val filePathResolver = new FilePathResolver(dictionaryConfig)
     val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths)
-    val words = wordsReader.getWords(typeWordPredicate).map(line => new Word(line))
+    val wordTypePredicate = WordsTypePredicate(dictionaryConfig.wordsType)
+    val words = wordsReader.getWords(wordTypePredicate).map(line => new Word(line))
     val wordsStream = WordsStreamFactory(words, dictionaryConfig.order)
 
     var wordsWithMistakes: scala.collection.immutable.Set[String] = Set.empty[String]

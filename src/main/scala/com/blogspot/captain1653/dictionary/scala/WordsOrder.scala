@@ -1,6 +1,6 @@
 package com.blogspot.captain1653.dictionary.scala
 
 object WordsOrder extends Enumeration {
-  val SEQUENTIAL = Value("seq")
-  val RANDOM = Value("random")
+  val SEQUENTIAL = Value
+  val RANDOM = Value
 }

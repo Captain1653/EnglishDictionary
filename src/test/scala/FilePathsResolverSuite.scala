@@ -1,4 +1,4 @@
-import com.blogspot.captain1653.dictionary.scala.{DictionaryConfig, FilePathResolver, QuestionStrategyType, WordsOrder}
+import com.blogspot.captain1653.dictionary.scala.{DictionaryConfig, FilePathResolver, QuestionStrategyType, WordSearchCriteria, WordType, WordsOrder}
 import org.scalatest.funsuite.AnyFunSuite
 
 class FilePathsResolverSuite extends AnyFunSuite {
@@ -8,7 +8,8 @@ class FilePathsResolverSuite extends AnyFunSuite {
       WordsOrder.RANDOM,
       QuestionStrategyType.RUSSIAN,
       "src/test/resources/filePathResolver/getAllFiles/",
-      Array("*")
+      Array("*"),
+      wordsType = WordSearchCriteria("noun", WordType.NOUN)
     )
     val paths = new FilePathResolver(dictionaryConfig).absoluteFilePaths
 
@@ -22,7 +23,8 @@ class FilePathsResolverSuite extends AnyFunSuite {
       WordsOrder.RANDOM,
       QuestionStrategyType.RUSSIAN,
       "dd",
-      Array("src/test/resources/filePathResolver/onlySpecifiedFiles/specifiedOne.txt")
+      Array("src/test/resources/filePathResolver/onlySpecifiedFiles/specifiedOne.txt"),
+      wordsType = WordSearchCriteria("noun", WordType.NOUN)
     )
     val paths = new FilePathResolver(dictionaryConfig).absoluteFilePaths
 

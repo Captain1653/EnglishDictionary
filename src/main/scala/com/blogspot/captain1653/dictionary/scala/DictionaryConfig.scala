@@ -4,5 +4,6 @@ case class DictionaryConfig(
                            order: WordsOrder.Value,
                            questionStrategyType: QuestionStrategyType.Value,
                            folder: String,
-                           files: Array[String]
+                           files: Array[String],
+                           wordsType: WordSearchCriteria
                            )

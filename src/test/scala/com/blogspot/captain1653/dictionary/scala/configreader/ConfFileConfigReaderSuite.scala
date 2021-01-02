@@ -14,7 +14,7 @@ class ConfFileConfigReaderSuite extends AnyFunSuite {
     assert("onePath" == conf.pathFiles(0))
     assert("twoPath" == conf.pathFiles(1))
     assert("ru" == conf.questionStrategy)
-    assert("noun" == conf.typeWord)
+    assert("noun" == conf.wordType)
   }
 
   test("return empty string if folderForFiles is not set") {

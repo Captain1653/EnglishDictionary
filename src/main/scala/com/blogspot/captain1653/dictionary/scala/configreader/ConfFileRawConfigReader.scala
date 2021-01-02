@@ -7,7 +7,7 @@ import java.io.File
 
 class ConfFileRawConfigReader(pathToConfig: String) extends RawConfigReader {
 
-  private val TYPE_WORD = "type-word"
+  private val WORD_TYPE = "type-word"
   private val FOLDER = "folder"
   private val ORDER = "order"
   private val FILES = "files"
@@ -19,7 +19,7 @@ class ConfFileRawConfigReader(pathToConfig: String) extends RawConfigReader {
       folderForFiles = if (config.hasPath(FOLDER)) config.getString(FOLDER) else "",
       pathFiles = config.getString(FILES).split(","),
       questionStrategy = config.getString(MODE),
-      typeWord = config.getString(TYPE_WORD),
+      wordType = config.getString(WORD_TYPE),
       order = config.getString(ORDER))
   }
 }

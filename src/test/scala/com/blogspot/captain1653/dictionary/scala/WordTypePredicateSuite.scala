@@ -2,25 +2,25 @@ package com.blogspot.captain1653.dictionary.scala
 
 import org.scalatest.funsuite.AnyFunSuite
 
-class TypeWordPredicateSuite extends AnyFunSuite {
+class WordTypePredicateSuite extends AnyFunSuite {
 
   test("return predicate for noun") {
-    val predicate = TypeWordPredicate("noun")
+    val predicate = WordsTypePredicate(WordSearchCriteria("noun", WordType.NOUN))
     assert(predicate("noun"))
   }
 
   test("return predicate for adjective") {
-    val predicate = TypeWordPredicate("adjective")
+    val predicate = WordsTypePredicate(WordSearchCriteria("adjective", WordType.ADJECTIVE))
     assert(predicate("adjective"))
   }
 
   test("return predicate for verb") {
-    val predicate = TypeWordPredicate("verb")
+    val predicate = WordsTypePredicate(WordSearchCriteria("verb", WordType.VERB))
     assert(predicate("verb"))
   }
 
   test("return predicate for adverb") {
-    val predicate = TypeWordPredicate("adverb")
+    val predicate = WordsTypePredicate(WordSearchCriteria("adverb",WordType.ADVERB))
     assert(predicate("adverb"))
   }
 }
