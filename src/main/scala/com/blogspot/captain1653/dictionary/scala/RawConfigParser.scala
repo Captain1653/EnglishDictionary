@@ -9,7 +9,9 @@ class RawConfigParser(rawConfig: RawConfig) {
   def parse(): DictionaryConfig = {
     DictionaryConfig(
       order = if (SEQUENTIAL_WORDS_ORDER == rawConfig.order) SEQUENTIAL else RANDOM,
-      questionStrategyType = parseQuestionStrategy(rawConfig.questionStrategy)
+      questionStrategyType = parseQuestionStrategy(rawConfig.questionStrategy),
+      folder = rawConfig.folderForFiles,
+      files = rawConfig.pathFiles
     )
   }
 

@@ -30,8 +30,9 @@ public class Main {
         QuestionStrategy questionStrategy = QuestionStrategyFactory.apply(dictionaryConfig.questionStrategyType());
 
         Predicate<String> typeWordPredicate = TypeWordPredicateFactory.apply().create(rawConfig.typeWord());
-        WordsReader wordsReader = new TextFileWordsReader();
-        List<String> lines = wordsReader.getWords(rawConfig, typeWordPredicate);
+        FilePathResolver filePathResolver = new FilePathResolver(dictionaryConfig);
+        WordsReader wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths());
+        List<String> lines = wordsReader.getWords(typeWordPredicate);
         List<Word> words = lines.stream().map(Word::new).collect(Collectors.toList());
 
         WordsStream wordsStream = WordsStreamFactory.apply(words, dictionaryConfig.order());

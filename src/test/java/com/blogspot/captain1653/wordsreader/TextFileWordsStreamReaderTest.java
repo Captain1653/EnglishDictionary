@@ -1,6 +1,5 @@
 package com.blogspot.captain1653.wordsreader;
 
-import com.blogspot.captain1653.dictionary.scala.RawConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -18,31 +17,21 @@ class TextFileWordsStreamReaderTest {
 
     @Test
     void readAllTypesWords() throws IOException {
-        String pathToFile = "wordsreader/readAllWords.txt";
-        RawConfig configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
         Predicate<String> typeWordPredicate = line -> true;
 
-        WordsReader wordsReader = new TextFileWordsReader();
-        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
+        WordsReader wordsReader = new TextFileWordsReader(new String[]{(TEST_RESOURCES + "wordsreader/readAllWords.txt")});
+        List<String> actual = wordsReader.getWords(typeWordPredicate);
 
         List<String> expected = Arrays.asList("house=дом", "next=следующий");
         assertEquals(expected, actual);
     }
 
-    private RawConfig getConfigurationWithPathFile(String pathToFile, String folderForFiles) {
-        return new RawConfig(
-                "", new String[]{pathToFile}, "", folderForFiles, ""
-        );
-    }
-
     @Test
     void readOnlyNounsByPredicate() throws IOException {
-        String pathToFile = "wordsreader/readNouns.txt";
-        RawConfig configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
         Predicate<String> typeWordPredicate = line -> line.startsWith("noun");
 
-        WordsReader wordsReader = new TextFileWordsReader();
-        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
+        WordsReader wordsReader = new TextFileWordsReader(new String[]{TEST_RESOURCES + "wordsreader/readNouns.txt"});
+        List<String> actual = wordsReader.getWords(typeWordPredicate);
 
         List<String> expected = Collections.singletonList("house=дом");
         assertEquals(expected, actual);
@@ -50,12 +39,10 @@ class TextFileWordsStreamReaderTest {
 
     @Test
     void skipEmptyLinesFromFile() throws IOException {
-        String pathToFile = "wordsreader/skipEmptyLinesFromFile.txt";
-        RawConfig configuration = getConfigurationWithPathFile(pathToFile, TEST_RESOURCES);
         Predicate<String> typeWordPredicate = line -> true;
 
-        WordsReader wordsReader = new TextFileWordsReader();
-        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
+        WordsReader wordsReader = new TextFileWordsReader(new String[]{TEST_RESOURCES + "wordsreader/skipEmptyLinesFromFile.txt"});
+        List<String> actual = wordsReader.getWords(typeWordPredicate);
 
         List<String> expected = Arrays.asList("house=дом", "next=следующий");
         assertEquals(expected, actual);
@@ -64,13 +51,11 @@ class TextFileWordsStreamReaderTest {
     @Disabled
     @Test
     void readAllFilesInTheFolderWhenPathToFilesIsStar() throws IOException {
-        String pathToFile = "*";
         String folderWithFiles = TEST_RESOURCES + "wordsreader/readAllFilesInFolder/";
-        RawConfig configuration = getConfigurationWithPathFile(pathToFile, folderWithFiles);
         Predicate<String> typeWordPredicate = line -> true;
 
-        WordsReader wordsReader = new TextFileWordsReader();
-        List<String> actual = wordsReader.getWords(configuration, typeWordPredicate);
+        WordsReader wordsReader = new TextFileWordsReader(new String[]{folderWithFiles + "one.txt",folderWithFiles + "two.txt"});
+        List<String> actual = wordsReader.getWords(typeWordPredicate);
 
         List<String> expected = Arrays.asList("build=строить", "house=дом");
         assertEquals(expected, actual);
