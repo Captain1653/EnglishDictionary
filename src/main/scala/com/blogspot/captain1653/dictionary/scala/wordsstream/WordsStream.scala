@@ -4,13 +4,12 @@ import com.blogspot.captain1653.dictionary.scala.{Word, WordsOrder}
 
 import scala.collection.mutable
 import scala.util.Random
-import scala.collection.JavaConverters.asScalaBufferConverter
 
 object WordsStreamFactory {
 
-  def apply(list: java.util.List[Word], wordsOrder: WordsOrder.Value): WordsStream = wordsOrder match {
-    case WordsOrder.SEQUENTIAL => new SequenceWordsStream(list.asScala.toList)
-    case WordsOrder.RANDOM => new RandomWordsStream(list.asScala.toList)
+  def apply(list: List[Word], wordsOrder: WordsOrder.Value): WordsStream = wordsOrder match {
+    case WordsOrder.SEQUENTIAL => new SequenceWordsStream(list)
+    case WordsOrder.RANDOM => new RandomWordsStream(list)
   }
 
   private class SequenceWordsStream(list: List[Word]) extends WordsStream {
