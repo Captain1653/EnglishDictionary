@@ -1,4 +1,4 @@
-package com.blogspot.captain1653.dictionary.reader
+package com.blogspot.captain1653.dictionary.config.reader
 
 import com.blogspot.captain1653.dictionary.config.RawConfig
 import com.blogspot.captain1653.dictionary.config.reader.ConfFileRawConfigReader

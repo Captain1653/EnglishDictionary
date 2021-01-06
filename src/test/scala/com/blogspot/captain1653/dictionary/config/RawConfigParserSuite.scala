@@ -1,6 +1,6 @@
-package com.blogspot.captain1653.dictionary
+package com.blogspot.captain1653.dictionary.config
 
-import com.blogspot.captain1653.dictionary.config.{RawConfig, RawConfigParser}
+import com.blogspot.captain1653.dictionary.{QuestionStrategyType, WordSearchCriteria, WordType, WordsOrder}
 import org.scalatest.funsuite.AnyFunSuite
 
 class RawConfigParserSuite extends AnyFunSuite {

@@ -1,4 +1,5 @@
-import com.blogspot.captain1653.dictionary.config.{DictionaryConfig, FilePathResolver}
+package com.blogspot.captain1653.dictionary.config
+
 import com.blogspot.captain1653.dictionary.{QuestionStrategyType, WordSearchCriteria, WordType, WordsOrder}
 import org.scalatest.funsuite.AnyFunSuite
 
