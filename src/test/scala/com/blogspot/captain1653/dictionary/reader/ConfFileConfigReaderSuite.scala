@@ -12,8 +12,7 @@ class ConfFileConfigReaderSuite extends AnyFunSuite {
     val conf: RawConfig = rawConfigReader.read()
     assert("someFolderForFiles" == conf.folderForFiles)
     assert("seq" == conf.order)
-    assert("onePath" == conf.pathFiles(0))
-    assert("twoPath" == conf.pathFiles(1))
+    assert("onePath,twoPath" == conf.pathFiles)
     assert("ru" == conf.questionStrategy)
     assert("noun" == conf.wordType)
   }

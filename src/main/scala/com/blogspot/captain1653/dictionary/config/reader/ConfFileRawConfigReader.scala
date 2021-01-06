@@ -17,7 +17,7 @@ class ConfFileRawConfigReader(pathToConfig: String) extends RawConfigReader {
     val config = ConfigFactory.parseFile(new File(pathToConfig)).getConfig("english.dictionary")
     RawConfig(
       folderForFiles = if (config.hasPath(FOLDER)) config.getString(FOLDER) else "",
-      pathFiles = config.getString(FILES).split(","),
+      pathFiles = config.getString(FILES),
       questionStrategy = config.getString(MODE),
       wordType = config.getString(WORD_TYPE),
       order = config.getString(ORDER))

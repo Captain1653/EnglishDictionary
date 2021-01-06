@@ -10,7 +10,7 @@ class RawConfigParser(rawConfig: RawConfig) {
       order = parseWordsOrder(rawConfig.order),
       questionStrategyType = parseQuestionStrategy(rawConfig.questionStrategy),
       folder = rawConfig.folderForFiles,
-      files = rawConfig.pathFiles,
+      files = rawConfig.pathFiles.split(","),
       wordsType = parseWordType(rawConfig.wordType)
     )
   }
