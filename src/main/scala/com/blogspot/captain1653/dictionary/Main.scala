@@ -22,7 +22,7 @@ object Main {
     val filePathResolver = new FilePathResolver(dictionaryConfig)
     val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths)
     val wordTypePredicate = WordsTypePredicate(dictionaryConfig.wordsType)
-    val words = wordsReader.getWords(wordTypePredicate).map(line => new Word(line))
+    val words = wordsReader.getWords(wordTypePredicate)
     val wordsStream = WordsStreamFactory(words, dictionaryConfig.order)
 
     var wordsWithMistakes: Set[String] = Set.empty[String]

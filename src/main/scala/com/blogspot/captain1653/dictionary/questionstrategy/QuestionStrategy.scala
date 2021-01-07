@@ -14,13 +14,13 @@ object QuestionStrategyFactory {
   }
 
   private class RussianQuestionStrategy extends QuestionStrategy {
-    override def askQuestion(word: Word): String = word.russian
-    override def getRightAnswer(word: Word): String = word.english
+    override def askQuestion(word: Word): String = word.russian.text
+    override def getRightAnswer(word: Word): String = word.english.text
   }
 
   private class EnglishQuestionStrategy extends QuestionStrategy {
-    override def askQuestion(word: Word): String = word.english
-    override def getRightAnswer(word: Word): String = word.russian
+    override def askQuestion(word: Word): String = word.english.text
+    override def getRightAnswer(word: Word): String = word.russian.text
   }
 
   private class MixQuestionStrategy extends QuestionStrategy {
@@ -28,11 +28,11 @@ object QuestionStrategyFactory {
 
     override def askQuestion(word: Word): String = {
       flag = new Random().nextBoolean()
-      if (flag) word.english else word.russian
+      if (flag) word.english.text else word.russian.text
     }
 
     override def getRightAnswer(word: Word): String = {
-      if (flag) word.russian else word.english
+      if (flag) word.russian.text else word.english.text
     }
   }
 }

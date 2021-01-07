@@ -1,6 +1,8 @@
 package com.blogspot.captain1653.dictionary.wordsreader
 
+import com.blogspot.captain1653.dictionary.Word
+
 trait WordsReader {
-  def getWords(predicate: String => Boolean): List[String]
+  def getWords(predicate: String => Boolean): List[Word]
 
 }
