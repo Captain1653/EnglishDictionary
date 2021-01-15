@@ -17,14 +17,13 @@ object Main {
     val rawConfig = configReader.read()
     val rawConfigParser = new RawConfigParser(rawConfig)
     val dictionaryConfig = rawConfigParser.parse()
-
-    val questionStrategy = QuestionStrategyFactory(dictionaryConfig.questionStrategyType)
-    val filePathResolver = new FilePathResolver(dictionaryConfig)
-    val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths)
     val wordTypePredicate = WordsTypePredicate(dictionaryConfig.wordsType)
+    val filePathResolver = new FilePathResolver(dictionaryConfig)
+    val questionStrategy = QuestionStrategyFactory(dictionaryConfig.questionStrategyType)
+    val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths)
+
     val words = wordsReader.getWords(wordTypePredicate)
     val wordsStream = WordsStreamFactory(words, dictionaryConfig.order)
-
     var wordsWithMistakes: Set[String] = Set.empty[String]
     var countQuestion = 0
 
