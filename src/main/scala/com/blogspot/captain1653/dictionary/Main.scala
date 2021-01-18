@@ -2,15 +2,12 @@ package com.blogspot.captain1653.dictionary
 
 import com.blogspot.captain1653.dictionary.config.{FilePathResolver, RawConfigParser}
 import com.blogspot.captain1653.dictionary.config.reader.ConfFileRawConfigReader
+import com.blogspot.captain1653.dictionary.dictionarysession.{ConsoleDictionarySession, DictionarySession}
 import com.blogspot.captain1653.dictionary.questionstrategy.QuestionStrategyFactory
 import com.blogspot.captain1653.dictionary.wordsreader.TextFileWordsReader
 import com.blogspot.captain1653.dictionary.wordsstream.WordsStreamFactory
 
-import scala.io.StdIn
-
 object Main {
-
-  private val EXIT_VALUE = "exit"
 
   def main(args: Array[String]): Unit = {
     val configReader = new ConfFileRawConfigReader(args(0))
@@ -24,34 +21,13 @@ object Main {
 
     val words = wordsReader.getWords(wordTypePredicate)
     val wordsStream = WordsStreamFactory(words, dictionaryConfig.order)
-    var wordsWithMistakes: Set[String] = Set.empty[String]
-    var countQuestion = 0
 
-    var isContinueLoop = true
-    while (isContinueLoop) {
-      val word = wordsStream.nextWord()
-      val question = questionStrategy.askQuestion(word)
-      println("Word: " + question)
+    val dictionarySession: DictionarySession = new ConsoleDictionarySession()
+    val sessionResult = dictionarySession.start(wordsStream, questionStrategy)
 
-      val answerFromUser = StdIn.readLine()
-      val rightAnswer = questionStrategy.getRightAnswer(word)
-
-      if (EXIT_VALUE == answerFromUser) {
-        println(s"Count question is: $countQuestion")
-        val countMistakes = wordsWithMistakes.size
-        println(s"You have done $countMistakes mistakes")
-        if (countMistakes > 0) println(s"Words are: ${wordsWithMistakes.mkString(",  ")}")
-        isContinueLoop = false
-      } else {
-        if (rightAnswer.equalsIgnoreCase(answerFromUser)) {
-          println("TRUE")
-        } else {
-          println(s"NO!!!!!! Answer is $rightAnswer")
-          wordsWithMistakes += rightAnswer
-        }
-        countQuestion += 1
-      }
-    }
+    println(s"Count question is: ${sessionResult.countQuestions}")
+    println(s"You have done ${sessionResult.mistakes.size} mistakes")
+    if (sessionResult.mistakes.nonEmpty) println(s"Words are: ${sessionResult.mistakes.mkString(",  ")}")
   }
 
 }

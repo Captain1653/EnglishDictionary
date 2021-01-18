@@ -57,8 +57,8 @@
         <profile>
             <id>home</id>
             <properties>
-                <clean.folder>/home/captain1653/Dropbox/English/words</clean.folder>
-                <output.folder>/home/captain1653/Dropbox/English/words</output.folder>
+                <clean.folder>/home/captain1653/Dropbox/English/wordsStream</clean.folder>
+                <output.folder>/home/captain1653/Dropbox/English/wordsStream</output.folder>
             </properties>
         </profile>
         <profile>
@@ -67,8 +67,8 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <clean.folder>/home/andrey/Dropbox/English/words</clean.folder>
-                <output.folder>/home/andrey/Dropbox/English/words</output.folder>
+                <clean.folder>/home/andrey/Dropbox/English/wordsStream</clean.folder>
+                <output.folder>/home/andrey/Dropbox/English/wordsStream</output.folder>
             </properties>
         </profile>
     </profiles>
@@ -82,7 +82,7 @@
                     <archive>
                         <manifest>
                             <mainClass>
-                                com.blogspot.captain1653.Main
+                                com.blogspot.captain1653.dictionary.Main
                             </mainClass>
                         </manifest>
                     </archive>

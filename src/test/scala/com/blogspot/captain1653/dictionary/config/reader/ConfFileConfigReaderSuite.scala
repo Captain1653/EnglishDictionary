@@ -1,7 +1,6 @@
 package com.blogspot.captain1653.dictionary.config.reader
 
 import com.blogspot.captain1653.dictionary.config.RawConfig
-import com.blogspot.captain1653.dictionary.config.reader.ConfFileRawConfigReader
 import org.scalatest.funsuite.AnyFunSuite
 
 class ConfFileConfigReaderSuite extends AnyFunSuite {
