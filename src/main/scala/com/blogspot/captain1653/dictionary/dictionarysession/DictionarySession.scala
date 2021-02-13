@@ -1,8 +1,7 @@
 package com.blogspot.captain1653.dictionary.dictionarysession
 
 import com.blogspot.captain1653.dictionary.SessionResult
-import com.blogspot.captain1653.dictionary.questionstrategy.QuestionStrategy
-import com.blogspot.captain1653.dictionary.wordsstream.WordsStream
+import com.blogspot.captain1653.dictionary.sessionsettings.SessionSettings
 
 trait DictionarySession {
 
@@ -16,10 +15,12 @@ trait DictionarySession {
 
   private[dictionarysession] def showWrongMessage(rightAnswer: String): Unit
 
-  def start(wordsStream: WordsStream, questionStrategy: QuestionStrategy): SessionResult = {
+  def start(sessionSettings: SessionSettings): SessionResult = {
     var isContinueLoop = true
     var countQuestions = 0
     var wordsWithMistakes: Set[String] = Set.empty[String]
+    val wordsStream = sessionSettings.wordsStream()
+    val questionStrategy = sessionSettings.questionStrategy()
     while (isContinueLoop) {
       val word = wordsStream.nextWord()
       val question = questionStrategy.askQuestion(word)

@@ -1,11 +1,7 @@
 package com.blogspot.captain1653.dictionary
 
-import com.blogspot.captain1653.dictionary.config.{FilePathResolver, RawConfigParser}
-import com.blogspot.captain1653.dictionary.config.reader.ConfFileRawConfigReader
 import com.blogspot.captain1653.dictionary.dictionarysession.{ConsoleDictionarySession, DictionarySession}
-import com.blogspot.captain1653.dictionary.questionstrategy.QuestionStrategyFactory
-import com.blogspot.captain1653.dictionary.wordsreader.TextFileWordsReader
-import com.blogspot.captain1653.dictionary.wordsstream.WordsStreamFactory
+import com.blogspot.captain1653.dictionary.sessionsettings.ConsoleSessionSettingsProvider
 
 import java.io.{BufferedWriter, File, FileWriter}
 import java.text.SimpleDateFormat
@@ -14,20 +10,11 @@ import java.util.Calendar
 object Main {
 
   def main(args: Array[String]): Unit = {
-    val configReader = new ConfFileRawConfigReader(args(0))
-    val rawConfig = configReader.read()
-    val rawConfigParser = new RawConfigParser(rawConfig)
-    val dictionaryConfig = rawConfigParser.parse()
-    val wordTypePredicate = WordsTypePredicate(dictionaryConfig.wordsType)
-    val filePathResolver = new FilePathResolver(dictionaryConfig)
-    val questionStrategy = QuestionStrategyFactory(dictionaryConfig.questionStrategyType)
-    val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths)
-
-    val words = wordsReader.getWords(wordTypePredicate)
-    val wordsStream = WordsStreamFactory(words, dictionaryConfig.order)
+    val sessionSettingsProvider = new ConsoleSessionSettingsProvider();
+    val sessionSettings = sessionSettingsProvider.sessionSettings()
 
     val dictionarySession: DictionarySession = new ConsoleDictionarySession()
-    val sessionResult = dictionarySession.start(wordsStream, questionStrategy)
+    val sessionResult = dictionarySession.start(sessionSettings)
 
     println(s"Count question is: ${sessionResult.countQuestions}")
     println(s"You have done ${sessionResult.mistakes.size} mistakes")
@@ -35,7 +22,7 @@ object Main {
 
     val fileName = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime()) + ".txt"
     val filePath = "/home/andrey/Others/english/sessions/" + fileName;
-    writeFile(filePath,sessionResult.mistakes)
+    writeFile(filePath, sessionResult.mistakes)
   }
 
   def writeFile(filename: String, lines: Set[String]): Unit = {
