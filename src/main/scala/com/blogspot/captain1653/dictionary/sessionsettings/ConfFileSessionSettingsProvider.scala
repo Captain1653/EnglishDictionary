@@ -4,6 +4,7 @@ import com.blogspot.captain1653.dictionary.WordsTypePredicate
 import com.blogspot.captain1653.dictionary.config.{FilePathResolver, RawConfigParser}
 import com.blogspot.captain1653.dictionary.config.reader.ConfFileRawConfigReader
 import com.blogspot.captain1653.dictionary.questionstrategy.{QuestionStrategy, QuestionStrategyFactory}
+import com.blogspot.captain1653.dictionary.wordmapper.DefaultStringWordMapper
 import com.blogspot.captain1653.dictionary.wordsreader.TextFileWordsReader
 import com.blogspot.captain1653.dictionary.wordsstream.{WordsStream, WordsStreamFactory}
 
@@ -21,7 +22,7 @@ class ConfFileSessionSettingsProvider extends SessionSettingsProvider {
     val dictionaryConfig = rawConfigParser.parse()
     val wordTypePredicate = WordsTypePredicate(dictionaryConfig.wordsType)
     val filePathResolver = new FilePathResolver(dictionaryConfig)
-    val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths)
+    val wordsReader = new TextFileWordsReader(filePathResolver.absoluteFilePaths, new DefaultStringWordMapper())
     val words = wordsReader.getWords(wordTypePredicate)
 
     new SessionSettings {

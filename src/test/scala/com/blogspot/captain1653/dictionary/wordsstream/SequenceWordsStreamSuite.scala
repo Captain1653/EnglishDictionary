@@ -1,12 +1,13 @@
 package com.blogspot.captain1653.dictionary.wordsstream
 
-import com.blogspot.captain1653.dictionary.{English, Russian, Word, WordsOrder}
+import com.blogspot.captain1653.dictionary.{English, Russian, Word, WordType, WordsOrder}
 import org.scalatest.funsuite.AnyFunSuite
+
 
 class SequenceWordsStreamSuite extends AnyFunSuite {
 
-  private val WORD_HOUSE = Word(new English("house"), new Russian("дом"))
-  private val WORD_MOUSE = Word(new English("mouse"), new Russian("мышь"))
+  private val WORD_HOUSE = Word(new English("house"), new Russian("дом"),WordType.NOUN)
+  private val WORD_MOUSE = Word(new English("mouse"), new Russian("мышь"), WordType.NOUN)
 
   test("get one word") {
     val wordsStream = WordsStreamFactory(List(WORD_HOUSE), WordsOrder.SEQUENTIAL)

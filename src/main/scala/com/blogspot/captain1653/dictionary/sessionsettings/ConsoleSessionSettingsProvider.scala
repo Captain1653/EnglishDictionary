@@ -1,6 +1,7 @@
 package com.blogspot.captain1653.dictionary.sessionsettings
 
 import com.blogspot.captain1653.dictionary.questionstrategy.{QuestionStrategy, QuestionStrategyFactory}
+import com.blogspot.captain1653.dictionary.wordmapper.DefaultStringWordMapper
 import com.blogspot.captain1653.dictionary.{QuestionStrategyType, WordSearchCriteria, WordType, WordsOrder, WordsTypePredicate}
 import com.blogspot.captain1653.dictionary.wordsreader.TextFileWordsReader
 import com.blogspot.captain1653.dictionary.wordsstream.{WordsStream, WordsStreamFactory}
@@ -12,7 +13,7 @@ class ConsoleSessionSettingsProvider extends SessionSettingsProvider {
   override def sessionSettings(): SessionSettings = {
     println("Input paths separated by comma")
     val filePaths = StdIn.readLine().split(",")
-    val wordsReader = new TextFileWordsReader(filePaths)
+    val wordsReader = new TextFileWordsReader(filePaths, new DefaultStringWordMapper())
 
     println("Words order: 1 - seq, 2 - rand")
     val wordsOrder = parseWordsOrder(StdIn.readLine())
