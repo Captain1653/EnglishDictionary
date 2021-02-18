@@ -8,13 +8,13 @@ import scala.io.Source
 
 class TextFileWordsReader(absoluteFilePaths: Array[String], stringWordMapper: StringWordMapper) extends WordsReader {
 
-
-  override def getWords(predicate: String => Boolean): List[Word] = {
+  override def getWords(predicate: Word => Boolean): List[Word] = {
     val words = mutable.MutableList.empty[Word]
     for(path <- absoluteFilePaths) {
       val file = Source.fromFile(path)
-      words ++= file.getLines().filter(line => line.nonEmpty && predicate(line))
+      words ++= file.getLines().filter(line => line.nonEmpty)
                               .map(line => stringWordMapper.map(line))
+                              .filter(word => predicate(word))
                               .toList
       file.close()
     }
